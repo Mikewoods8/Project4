@@ -80,6 +80,7 @@
     <Content Include="stylesheets\CreateReservation.css" />
     <Content Include="stylesheets\login.css" />
     <Content Include="stylesheets\SiteVisitor.css" />
+    <Content Include="ViewInfo.asmx" />
     <Content Include="ViewPersonalReviews.aspx" />
     <Content Include="ViewReservations.aspx" />
     <Content Include="Web.config" />
@@ -148,6 +149,10 @@
     </Compile>
     <Compile Include="SiteVisitor.aspx.designer.cs">
       <DependentUpon>SiteVisitor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewInfo.asmx.cs">
+      <DependentUpon>ViewInfo.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ViewPersonalReviews.aspx.cs">
       <DependentUpon>ViewPersonalReviews.aspx</DependentUpon>
