@@ -1,0 +1,37 @@
+﻿body {
+    font-family: 'Mongolian Baiti';
+    background-image: url(../images/login-background.jpg);
+    background-size: cover;
+}
+
+form#form1 {
+    background-color: rgb(255 255 255 / 0.5);
+    margin: 50px;
+    padding: 20px
+}
+
+#title h1 {
+    font-size: 30pt;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#reservation, #review {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+}
+
+    #reservation label, #reservation input, #reservation select {
+        display: block; 
+        margin: 10px 0; 
+    }
+
+    #review label, #review input, #review select {
+        margin: 10px 0;
+    }

@@ -1,0 +1,40 @@
+﻿body {
+    font-family: 'Mongolian Baiti';
+    background-image: url(../images/login-background.jpg);
+    background-size: cover;
+    justify-content: center;
+}
+
+form#form1 {
+    background-color: rgb(255 255 255 / 0.5);
+    margin: 50px;
+    padding: 20px
+}
+
+#title h1 {
+    font-size: 30pt;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+#btnLogin, #btnSubmit {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#userLogin, #restaurant{
+    text-align: center;
+    font-size: 15pt;
+}
+
+#radListCategory{
+    justify-content: center;
+}
+
+.centered-radio-list {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto; 
+}
