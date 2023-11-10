@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 
-namespace Project4
+namespace Project3
 {
     public partial class CreateReview : System.Web.UI.Page
     {
@@ -36,21 +36,31 @@ namespace Project4
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             Review newReview = new Review();
-
-            newReview.UserID = txtUserID.Text;
-            newReview.Name = txtName.Text;
-            newReview.Restaurant = txtRestaurant.Text;
-            newReview.FoodRating = int.Parse(Request.Form["radFood"]);
-            newReview.ServiceRating = int.Parse(Request.Form["radService"]);
-            newReview.AtmosphereRating = int.Parse(Request.Form["radAtmosphere"]);
-            newReview.PriceRating = int.Parse(Request.Form["radPrice"]);
-            newReview.Comments = txtComments.Text;
-
-            newReview.Comments = txtComments.Text;
-
-            newReview.CreateReviews();
-            lblConfirm.Text = "Review Submitted.";
+            if (txtUserID.Text == null || txtUserID.Text == "" || txtName.Text == null || txtName.Text == "" ||
+                txtRestaurant.Text == null || txtRestaurant.Text == "" || txtComments.Text == null || txtComments.Text == "" ||
+                string.IsNullOrEmpty(Request.Form["radFood"]) || string.IsNullOrEmpty(Request.Form["radService"]) ||
+                string.IsNullOrEmpty(Request.Form["radAtmosphere"]) || string.IsNullOrEmpty(Request.Form["radPrice"]))
+            {
+                lblConfirm.Text = "You must fill out all fields before submitting.";
+            }
+            else
+            {
+                lblConfirm.Text = "";
+                newReview.UserID = txtUserID.Text;
+                newReview.Name = txtName.Text;
+                newReview.Restaurant = txtRestaurant.Text;
+                newReview.FoodRating = int.Parse(Request.Form["radFood"]);
+                newReview.ServiceRating = int.Parse(Request.Form["radService"]);
+                newReview.AtmosphereRating = int.Parse(Request.Form["radAtmosphere"]);
+                newReview.PriceRating = int.Parse(Request.Form["radPrice"]);
+                newReview.Comments = txtComments.Text;
+                newReview.CreateReviews();
+                lblConfirm.Text = "Review Submitted.";
+            }
         }
-
+        protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
+        }
     }
 }

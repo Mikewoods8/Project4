@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 
-namespace Project4
+namespace Project3
 {
     public partial class RepresentativesRestaurants : System.Web.UI.Page
     {
@@ -100,6 +100,10 @@ namespace Project4
             cmd.Parameters.AddWithValue("@Category", category);
 
             db.DoUpdateUsingCmdObj(cmd);
+        }
+        protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
         }
     }
 }

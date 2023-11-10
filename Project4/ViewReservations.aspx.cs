@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 
-namespace Project4
+namespace Project3
 {
     public partial class ViewReservations : System.Web.UI.Page
     {
@@ -44,6 +44,10 @@ namespace Project4
                 gvReservations.DataSource = dataSet.Tables[0];
                 gvReservations.DataBind();
             }
+        }
+        protected void btnReturnToYourRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Reviewer.aspx.cs" Inherits="Project4.Reviewer" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Reviewer.aspx.cs" Inherits="Project3.Reviewer" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewReservations.aspx.cs" Inherits="Project4.ViewReservations" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewReservations.aspx.cs" Inherits="Project3.ViewReservations" %>
 
 <!DOCTYPE html>
 
@@ -15,6 +15,8 @@
             </asp:GridView>
 
         </div>
+        <asp:Button ID="btnReturnToYourRestaurants" runat="server" Text="Return to Your Restaurants" OnClick="btnReturnToYourRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
+
     </form>
 </body>
 </html>

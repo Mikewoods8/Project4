@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRestaurant.aspx.cs" Inherits="Project4.CreateRestaurant" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRestaurant.aspx.cs" Inherits="Project3.CreateRestaurant" %>
 
 <!DOCTYPE html>
 
@@ -13,7 +13,6 @@
             <h1>Add a Restaurant</h1>
         </div>
         <div id="restaurant">
-
             <asp:Label ID="lblName" runat="server" Text="Restaurant Name: " Font-Bold="True"></asp:Label>
             <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
             <br />
@@ -26,8 +25,8 @@
             <asp:TextBox ID="txtRepID" runat="server"></asp:TextBox>
             <br />
             <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" BackColor="#3399FF" Font-Size="Large" />
-            <asp:Label ID="lblConfirm" runat="server"></asp:Label>
-
+            <asp:Label ID="lblConfirm" runat="server"></asp:Label><br />
+            <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" /><br />
         </div>
     </form>
 </body>

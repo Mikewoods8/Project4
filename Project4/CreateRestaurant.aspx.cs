@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 
-namespace Project4
+namespace Project3
 {
     public partial class CreateRestaurant : System.Web.UI.Page
     {
@@ -63,6 +63,11 @@ namespace Project4
             }
 
             lblConfirm.Text = "Restaurant succesfully created.";
+        }
+
+        protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
         }
     }
 }

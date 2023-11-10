@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateReservation.aspx.cs" Inherits="Project4.CreateReservation" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateReservation.aspx.cs" Inherits="Project3.CreateReservation" %>
 
 <!DOCTYPE html>
 
@@ -51,9 +51,9 @@
             </asp:DropDownList>
             <br />
             <asp:Button ID="btnCreateReservation" runat="server" Text="Create Reservation" OnClick="btnCreateReservation_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
+            <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" /><br />
             <asp:Label ID="lblConfirm" runat="server"></asp:Label>
             <br />
-
         </div>
     </form>
 </body>

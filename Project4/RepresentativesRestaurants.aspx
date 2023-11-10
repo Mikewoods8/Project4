@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RepresentativesRestaurants.aspx.cs" Inherits="Project4.RepresentativesRestaurants" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RepresentativesRestaurants.aspx.cs" Inherits="Project3.RepresentativesRestaurants" %>
 
 <!DOCTYPE html>
 
@@ -35,12 +35,10 @@
                             <asp:Button ID="btnReservations" runat="server" Text="View Reservations" CommandName="ViewReservation" CommandArgument='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
-
                 </Columns>
             </asp:GridView>
-
-            <asp:Label ID="lblConfirm" runat="server"></asp:Label>
-
+            <asp:Label ID="lblConfirm" runat="server"></asp:Label><br />
+            <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
         </div>
     </form>
 </body>

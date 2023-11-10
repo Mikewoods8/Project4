@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using Utilities;
 
 
-namespace Project4
+namespace Project3
 {
     public partial class CreateReservation : System.Web.UI.Page
     {
@@ -44,6 +44,10 @@ namespace Project4
                 reservation.CreateReservation();
                 lblConfirm.Text = "Reservation Created.";
             }
+        }
+        protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
         }
     }
 }
