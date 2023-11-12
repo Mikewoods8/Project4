@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D2F86601-E3FC-42BC-B3AF-FE9A1DA6AB4D}</ProjectGuid>
+    <ProjectGuid>{D9D49819-091C-47A2-9071-C30C449E8EEC}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Project4</RootNamespace>
-    <AssemblyName>Project4</AssemblyName>
+    <RootNamespace>RestaurantSoapService</RootNamespace>
+    <AssemblyName>RestaurantSoapService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -67,101 +67,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CreateReservation.aspx" />
-    <Content Include="CreateRestaurant.aspx" />
-    <Content Include="CreateReview.aspx" />
-    <Content Include="images\login-background.jpg" />
-    <Content Include="LogIn.aspx" />
-    <Content Include="Representative.aspx" />
-    <Content Include="RepresentativesRestaurants.aspx" />
-    <Content Include="Reviewer.aspx" />
-    <Content Include="Reviews.aspx" />
-    <Content Include="SiteVisitor.aspx" />
-    <Content Include="stylesheets\CreateReservation.css" />
-    <Content Include="stylesheets\login.css" />
-    <Content Include="stylesheets\SiteVisitor.css" />
-    <Content Include="ViewPersonalReviews.aspx" />
-    <Content Include="ViewReservations.aspx" />
+    <Content Include="ViewInfo.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateReservation.aspx.cs">
-      <DependentUpon>CreateReservation.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CreateReservation.aspx.designer.cs">
-      <DependentUpon>CreateReservation.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CreateRestaurant.aspx.cs">
-      <DependentUpon>CreateRestaurant.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CreateRestaurant.aspx.designer.cs">
-      <DependentUpon>CreateRestaurant.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CreateReview.aspx.cs">
-      <DependentUpon>CreateReview.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CreateReview.aspx.designer.cs">
-      <DependentUpon>CreateReview.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LogIn.aspx.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LogIn.aspx.designer.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Representative.aspx.cs">
-      <DependentUpon>Representative.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Representative.aspx.designer.cs">
-      <DependentUpon>Representative.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="RepresentativesRestaurants.aspx.cs">
-      <DependentUpon>RepresentativesRestaurants.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RepresentativesRestaurants.aspx.designer.cs">
-      <DependentUpon>RepresentativesRestaurants.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reviewer.aspx.cs">
-      <DependentUpon>Reviewer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reviewer.aspx.designer.cs">
-      <DependentUpon>Reviewer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reviews.aspx.cs">
-      <DependentUpon>Reviews.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reviews.aspx.designer.cs">
-      <DependentUpon>Reviews.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SiteVisitor.aspx.cs">
-      <DependentUpon>SiteVisitor.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SiteVisitor.aspx.designer.cs">
-      <DependentUpon>SiteVisitor.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewPersonalReviews.aspx.cs">
-      <DependentUpon>ViewPersonalReviews.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewPersonalReviews.aspx.designer.cs">
-      <DependentUpon>ViewPersonalReviews.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewReservations.aspx.cs">
-      <DependentUpon>ViewReservations.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewReservations.aspx.designer.cs">
-      <DependentUpon>ViewReservations.aspx</DependentUpon>
+    <Compile Include="ViewInfo.asmx.cs">
+      <DependentUpon>ViewInfo.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -177,10 +90,6 @@
     <ProjectReference Include="..\MyClassLibrary\MyClassLibrary.csproj">
       <Project>{763f7482-4c3d-49f4-baac-cf22bec2cf95}</Project>
       <Name>MyClassLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RestaurantSoapService\RestaurantSoapService.csproj">
-      <Project>{d9d49819-091c-47a2-9071-c30c449e8eec}</Project>
-      <Name>RestaurantSoapService</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{63f537f2-3170-4d9d-a474-65afcdbe9e5c}</Project>
@@ -200,9 +109,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50304</DevelopmentServerPort>
+          <DevelopmentServerPort>55446</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50304/</IISUrl>
+          <IISUrl>http://localhost:55446/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

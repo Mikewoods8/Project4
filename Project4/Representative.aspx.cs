@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using Project4;
 
 namespace Project3
 {
@@ -130,6 +131,13 @@ namespace Project3
                 string selectedName = gvRestaurants.Rows[selectedIndex].Cells[0].Text;
 
                 Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={Session["UserID"]}");
+            }
+            else if (e.CommandName == "ViewDetails")
+            {
+                string selectedName = gvRestaurants.Rows[rowIndex].Cells[0].Text;
+                ViewInfo service = new ViewInfo();
+                Info details = service.GetRestaurantDetails(selectedName);
+                ClientScript.RegisterStartupScript(this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
             }
         }
 

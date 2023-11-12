@@ -130,7 +130,7 @@ namespace Project3
 
                 Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={Session["UserID"]}");
             }
-            if (e.CommandName == "ViewDetails")
+            else if (e.CommandName == "ViewDetails")
             {
                 string selectedName = gvRestaurants.Rows[rowIndex].Cells[0].Text;
                 ViewInfo service = new ViewInfo();
