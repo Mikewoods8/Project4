@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 
-namespace Project3
+namespace Project4
 {
     public partial class ViewReservations : System.Web.UI.Page
     {

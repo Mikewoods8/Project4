@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SiteVisitor.aspx.cs" Inherits="Project3.SiteVisitor" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SiteVisitor.aspx.cs" Inherits="Project4.SiteVisitor" %>
 
 <!DOCTYPE html>
 

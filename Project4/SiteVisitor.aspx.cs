@@ -8,9 +8,9 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
-using Project4;
+using RestaurantSoapService;
 
-namespace Project3
+namespace Project4
 {
     public partial class SiteVisitor : System.Web.UI.Page
     {

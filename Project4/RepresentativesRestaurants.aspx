@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RepresentativesRestaurants.aspx.cs" Inherits="Project3.RepresentativesRestaurants" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RepresentativesRestaurants.aspx.cs" Inherits="Project4.RepresentativesRestaurants" %>
 
 <!DOCTYPE html>
 

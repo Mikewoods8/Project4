@@ -5,7 +5,7 @@ using System.Web.Services;
 using MyClassLibrary;
 using Utilities;
 
-namespace Project4
+namespace RestaurantSoapService
 {
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]

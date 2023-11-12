@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Utilities;
 using MyClassLibrary;
 
-namespace Project3
+namespace Project4
 {
     public partial class LogIn : System.Web.UI.Page
     {
@@ -109,7 +109,7 @@ namespace Project3
             if (!InputValidation.ValidateCreateUser(txtUserID, txtPassword, txtFirstName, txtLastName, txtEmail, txtPhone, radReviewer, radRepresentative, lblErrorId, lblErrorPassword, lblErrorFirst, lblErrorLast, lblErrorPhone, lblErrorEmail, lblErrorRole))
                 return;
 
-            User newUser = new User();
+            UserModel newUser = new UserModel();
 
             newUser.UserId = txtUserID.Text;
             newUser.Password = txtPassword.Text;
@@ -128,8 +128,7 @@ namespace Project3
             }
 
             newUser.CreateUser();
-            lblCreateUserConfirm.Text = "Account Created. Please Log In.";
-            lblCreateUserConfirm.Visible = true;
+
         }
     }
 }

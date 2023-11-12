@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRestaurant.aspx.cs" Inherits="Project3.CreateRestaurant" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRestaurant.aspx.cs" Inherits="Project4.CreateRestaurant" %>
 
 <!DOCTYPE html>
 

@@ -9,9 +9,9 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 using System.Web.Services;
-using Project4;
+using RestaurantSoapService;
 
-namespace Project3
+namespace Project4
 {
     public partial class Reviewer : System.Web.UI.Page
     {
