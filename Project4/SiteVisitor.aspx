@@ -25,7 +25,11 @@
                 <Columns>
                     <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                     <asp:BoundField DataField="Category" HeaderText="Category" ReadOnly="true" />
-
+                    <asp:TemplateField HeaderText="Details">
+                        <ItemTemplate>
+                            <asp:Button ID="btnDetails" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Container.DataItemIndex %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Reservations">
                         <ItemTemplate>
                             <asp:Button ID="btnReservation" runat="server" Text="Make Reservation" CommandName="MakeReservation" CommandArgument='<%# Container.DataItemIndex %>' />

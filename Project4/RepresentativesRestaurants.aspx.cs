@@ -101,5 +101,9 @@ namespace Project4
 
             db.DoUpdateUsingCmdObj(cmd);
         }
+        protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
+        }
     }
 }

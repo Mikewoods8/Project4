@@ -10,6 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div id="GridView">
+            <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" /><br />
             <asp:GridView ID="gvPersonalReviews" runat="server" AutoGenerateColumns="false" OnRowCommand="gvReviews_RowCommand" OnRowDeleting="gvReviews_RowDeleting" OnRowUpdating="gvPersonalReviews_RowUpdating" DataKeyNames="Id">
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="true" />

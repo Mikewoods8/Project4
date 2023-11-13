@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web.UI.WebControls;
 using Utilities;
 
 namespace MyClassLibrary
 {
-    public class User
+    public class UserModel
     {
         public string UserId { get; set; }
         public string Password { get; set; }
@@ -42,7 +40,5 @@ namespace MyClassLibrary
                 connection.Close();
             }
         }
-
     }
 }
-

@@ -45,5 +45,9 @@ namespace Project4
                 gvReservations.DataBind();
             }
         }
+        protected void btnReturnToYourRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
+        }
     }
 }

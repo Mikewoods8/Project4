@@ -55,9 +55,8 @@
 
             <br />
             <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
-
-            <asp:Label ID="lblConfirm" runat="server"></asp:Label>
-
+            <asp:Label ID="lblConfirm" runat="server"></asp:Label><br />
+            <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
         </div>
     </form>
 </body>

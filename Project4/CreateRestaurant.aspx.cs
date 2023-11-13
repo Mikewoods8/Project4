@@ -64,5 +64,10 @@ namespace Project4
 
             lblConfirm.Text = "Restaurant succesfully created.";
         }
+
+        protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
+        }
     }
 }

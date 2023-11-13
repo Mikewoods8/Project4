@@ -45,5 +45,9 @@ namespace Project4
                 lblConfirm.Text = "Reservation Created.";
             }
         }
+        protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reviewer.aspx");
+        }
     }
 }

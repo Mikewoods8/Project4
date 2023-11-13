@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -117,6 +118,13 @@ namespace Project4
                 string selectedName = gvRestaurants.Rows[rowIndex].Cells[0].Text;
 
                 Response.Redirect($"CreateReservation.aspx?Name={selectedName}");
+            }
+            else if (e.CommandName == "ViewDetails")
+            {
+                string selectedName = gvRestaurants.Rows[rowIndex].Cells[0].Text;
+                ViewInfo service = new ViewInfo();
+                Info details = service.GetRestaurantDetails(selectedName);
+                ClientScript.RegisterStartupScript(this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
             }
         }
 
