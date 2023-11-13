@@ -4,6 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
+using System.Web.Script.Serialization;
+using System.IO;
+using System.Net;
+using System.Data;
 using Utilities;
 using MyClassLibrary;
 
@@ -11,6 +16,7 @@ namespace Project4
 {
     public partial class LogIn : System.Web.UI.Page
     {
+        string webApiUrl = "https://localhost:44327/api/UserService/";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -127,8 +133,39 @@ namespace Project4
                 newUser.Role = "Representative";
             }
 
-            newUser.CreateUser();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            String jsonUser = js.Serialize(newUser);
 
+            try
+            {
+                WebRequest request = WebRequest.Create(webApiUrl + "AddUser/");
+                request.Method = "POST";
+                request.ContentLength = jsonUser.Length;
+                request.ContentType = "application/json";
+
+                StreamWriter writer = new StreamWriter(request.GetRequestStream());
+                writer.Write(jsonUser);
+                writer.Flush();
+                writer.Close();
+
+                WebResponse response = request.GetResponse();
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                String data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if (data == "true")
+                    lblCreateUserConfirm.Text = "Account Created. Please return to the login page.";
+                else
+                    lblCreateUserConfirm.Text = "A problem occured. Account not created.";
+
+            }
+            catch (Exception ex)
+            {
+                lblCreateUserConfirm.Text = "Error: " + ex.Message;
+
+            }
         }
     }
 }

@@ -19,26 +19,5 @@ namespace MyClassLibrary
         public string Phone { get; set; }
         public string Role { get; set; }
 
-        public void CreateUser()
-        {
-            DBConnect db = new DBConnect();
-            SqlConnection connection = db.GetConnection();
-
-            using (SqlCommand cmd = new SqlCommand("CreateUser", connection))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@UserId", UserId);
-                cmd.Parameters.AddWithValue("@Password", Password);
-                cmd.Parameters.AddWithValue("@FirstName", FirstName);
-                cmd.Parameters.AddWithValue("@LastName", LastName);
-                cmd.Parameters.AddWithValue("@Email", Email);
-                cmd.Parameters.AddWithValue("@Phone", Phone);
-                cmd.Parameters.AddWithValue("@Role", Role);
-
-                connection.Open();
-                cmd.ExecuteNonQuery();
-                connection.Close();
-            }
-        }
+              }
     }
-}
