@@ -137,6 +137,10 @@
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.5, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.5\lib\net461\System.Data.SqlClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -297,10 +301,6 @@
     <ProjectReference Include="..\MyClassLibrary\MyClassLibrary.csproj">
       <Project>{763f7482-4c3d-49f4-baac-cf22bec2cf95}</Project>
       <Name>MyClassLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RestaurantAPI\RestaurantAPI.csproj">
-      <Project>{bf0d76e1-a1cb-4ef1-aa22-0bc43873370c}</Project>
-      <Name>RestaurantAPI</Name>
     </ProjectReference>
     <ProjectReference Include="..\RestaurantSoapService\RestaurantSoapService.csproj">
       <Project>{d9d49819-091c-47a2-9071-c30c449e8eec}</Project>

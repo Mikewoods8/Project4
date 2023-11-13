@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantSoapService", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{63F537F2-3170-4D9D-A474-65AFCDBE9E5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantAPI", "RestaurantAPI\RestaurantAPI.csproj", "{BF0D76E1-A1CB-4EF1-AA22-0BC43873370C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantAPI", "RestaurantAPI\RestaurantAPI.csproj", "{C4975C88-AB7C-4527-984D-8FCEC2D80F9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{63F537F2-3170-4D9D-A474-65AFCDBE9E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63F537F2-3170-4D9D-A474-65AFCDBE9E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63F537F2-3170-4D9D-A474-65AFCDBE9E5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF0D76E1-A1CB-4EF1-AA22-0BC43873370C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF0D76E1-A1CB-4EF1-AA22-0BC43873370C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF0D76E1-A1CB-4EF1-AA22-0BC43873370C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF0D76E1-A1CB-4EF1-AA22-0BC43873370C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4975C88-AB7C-4527-984D-8FCEC2D80F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4975C88-AB7C-4527-984D-8FCEC2D80F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4975C88-AB7C-4527-984D-8FCEC2D80F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4975C88-AB7C-4527-984D-8FCEC2D80F9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

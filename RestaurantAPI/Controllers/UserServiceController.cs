@@ -10,12 +10,29 @@ using System.Data.SqlClient;
 using MyClassLibrary;
 using Utilities;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace RestaurantAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/UserService")]
     public class UserServiceController : Controller
     {
+        // GET: api/<UserService>
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "TestName", "Test1", "TestTest" };
+        }
+
+        // GET api/<UserService>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST api/<UserService>
         [HttpPost()]
         [HttpPost("AddUser")]
         public Boolean AddUser([FromBody] UserModel user)
