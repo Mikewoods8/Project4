@@ -299,7 +299,7 @@
       <Name>MyClassLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\RestaurantAPI\RestaurantAPI.csproj">
-      <Project>{e28d0577-f03f-4194-8eae-7b2c8fe01063}</Project>
+      <Project>{bf0d76e1-a1cb-4ef1-aa22-0bc43873370c}</Project>
       <Name>RestaurantAPI</Name>
     </ProjectReference>
     <ProjectReference Include="..\RestaurantSoapService\RestaurantSoapService.csproj">
@@ -317,6 +317,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
