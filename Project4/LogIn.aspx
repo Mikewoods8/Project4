@@ -1,6 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="Project4.LogIn" %>
 
 <!DOCTYPE html>
+<%-- To Do:
+    Averages
+    Finish Web API DB calls
+    Make responsive
+    Manage session via web API 
+    Modify Reservations
+    Add Images
+--%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
