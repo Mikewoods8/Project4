@@ -16,8 +16,7 @@ namespace Project4
 {
     public partial class LogIn : System.Web.UI.Page
     {
-        //Get this from local browser to test, then use actual URL when publishing. 
-        string webApiUrl = "https://localhost:44300/api/";
+        string webApiUrl = "https://localhost:7060/api";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -157,9 +156,9 @@ namespace Project4
                 response.Close();
 
                 if (data == "true")
-                    lblCreateUserConfirm.Text = "Account Created. Please return to the login page.";
+                   lblCreateUserConfirm.Text = "Account Created. Please return to the login page.";
                 else
-                    lblCreateUserConfirm.Text = "A problem occured. Account not created.";
+                   lblCreateUserConfirm.Text = "A problem occured. Account not created.";
 
             }
             catch (Exception ex)
