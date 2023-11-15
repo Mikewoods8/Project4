@@ -53,7 +53,7 @@
             <asp:Button ID="btnSubmit" runat="server" Text="Submit" Visible="False" OnClick="btnSubmit_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
             <asp:Button ID="btnSubmitAccount" runat="server" OnClick="btnSubmitAccount_Click" Text="Create Account" Visible="False" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
             <asp:Label ID="lblErrorLogIn" runat="server" ForeColor="#800000" Visible="False"></asp:Label>
-            <asp:Label ID="lblCreateUserConfirm" runat="server" ForeColor="#800000" Visible="False"></asp:Label>
+            <asp:Label ID="lblCreateUserConfirm" runat="server" ForeColor="Maroon"></asp:Label>
             <br />
         </div>
     </form>

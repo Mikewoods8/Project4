@@ -18,19 +18,6 @@ namespace RestaurantAPI.Controllers
     [Route("api/UserService")]
     public class UserServiceController : Controller
     {
-        // GET: api/<UserService>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "TestName", "Test1", "TestTest" };
-        }
-
-        // GET api/<UserService>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<UserService>
         [HttpPost()]
