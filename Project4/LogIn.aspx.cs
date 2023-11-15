@@ -16,6 +16,7 @@ namespace Project4
 {
     public partial class LogIn : System.Web.UI.Page
     {
+        //Get this from local browser to test, then use actual URL when publishing. 
         string webApiUrl = "https://localhost:44300/api/";
         protected void Page_Load(object sender, EventArgs e)
         {

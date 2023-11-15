@@ -33,7 +33,6 @@ namespace RestaurantAPI.Controllers
         }
 
         // POST api/<UserService>
-        [HttpPost()]
         [HttpPost("AddUser")]
         public Boolean AddUser([FromBody] UserModel user)
         {
