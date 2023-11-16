@@ -148,8 +148,18 @@ namespace Project4
 
         protected void btnViewPersonalReviews_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"ViewPersonalReviews.aspx?UserID={Session["UserID"]}");
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
+            if (!string.IsNullOrEmpty(userID))
+            {
+                Response.Redirect($"ViewPersonalReviews.aspx?UserID={userID}");
+            }
+            else
+            {
+                Response.Redirect("LogIn.aspx");
+            }
         }
+
 
         protected void btnAddRestaurant_Click(object sender, EventArgs e)
         {
@@ -158,7 +168,16 @@ namespace Project4
 
         protected void btnRestaurants_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"RepresentativesRestaurants.aspx?UserID={Session["UserID"]}");
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
+            if (!string.IsNullOrEmpty(userID))
+            {
+                Response.Redirect($"RepresentativesRestaurants.aspx?UserID={userID}");
+            }
+            else
+            {
+                Response.Redirect("LogIn.aspx");
+            }
         }
     }
 }

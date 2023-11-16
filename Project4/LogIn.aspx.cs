@@ -11,6 +11,7 @@ using System.Net;
 using System.Data;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -52,8 +53,6 @@ namespace Project4
             lblErrorPhone.Visible = false;
             lblErrorRole.Visible = false;
             lblErrorLogIn.Visible = false;
-
-
             lblMessage.Visible = true;
             lblID.Visible = true;
             txtUserID.Visible = true;
@@ -72,7 +71,9 @@ namespace Project4
             string userID = txtUserID.Text;
             string password = txtPassword.Text;
 
-            Session["UserID"] = userID;
+            SessionManagement userSession = new SessionManagement();
+            userSession.SetUserID(userID);
+
             AccountConfirmation.Login(userID, password, lblErrorLogIn);
         }
 
@@ -81,8 +82,6 @@ namespace Project4
             lblMessage.Visible = false;
             btnSubmit.Visible = false;
             lblErrorLogIn.Visible = false;
-
-
             lblCreateAccountMessage.Visible = true;
             lblID.Visible = true;
             txtUserID.Visible = true;

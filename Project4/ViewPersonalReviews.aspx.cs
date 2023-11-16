@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -17,9 +18,11 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["UserID"] != null)
+                SessionManagement sessionID = new SessionManagement();
+                string userID = sessionID.GetUserID();
+                if (userID != null)
                 {
-                    string selectedName = Request.QueryString["UserID"];
+                    string selectedName = userID;
 
                     PopulateReviews(selectedName);
                 }
@@ -47,13 +50,15 @@ namespace Project4
         }
         protected void gvReviews_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
             if (e.CommandName == "Delete")
             {
                 int reviewId = Convert.ToInt32(e.CommandArgument);
 
                 DeleteReview(reviewId);
 
-                string selectedName = Request.QueryString["UserID"];
+                string selectedName = userID;
                 PopulateReviews(selectedName);
             }
             else if (e.CommandName == "Modify")
@@ -61,7 +66,7 @@ namespace Project4
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
                 gvPersonalReviews.EditIndex = rowIndex;
 
-                string selectedName = Request.QueryString["UserID"];
+                string selectedName = userID;
                 PopulateReviews(selectedName);
             }
             else if (e.CommandName == "Update")
@@ -82,7 +87,7 @@ namespace Project4
                     UpdateReview(reviewId, txtFoodRating.Text, txtServiceRating.Text, txtAtmosphereRating.Text, txtPriceRating.Text, txtComments.Text);
 
                     gvPersonalReviews.EditIndex = -1;
-                    string selectedName = Request.QueryString["UserID"];
+                    string selectedName = userID;
                     PopulateReviews(selectedName);
                 }
             }

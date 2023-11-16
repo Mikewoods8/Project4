@@ -146,7 +146,9 @@ namespace Project4
 
         protected void btnViewPersonalReviews_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"ViewPersonalReviews.aspx?UserID={Session["UserID"]}");
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
+            Response.Redirect($"ViewPersonalReviews.aspx?UserID={userID}");
         }
 
         protected void btnAddRestaurant_Click(object sender, EventArgs e)

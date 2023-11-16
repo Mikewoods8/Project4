@@ -4,8 +4,8 @@
 <%-- To Do:
     Averages (Done)
     Finish Web API DB calls (Working)
-    Make responsive (Done)(script manager ==> update panel ==> content templeate ==> put all controls inside)
-    Manage session via web API 
+    Make responsive (Done)
+    Manage session via one of the web API (Done)
     Modify Reservations
     Add Images
 --%>

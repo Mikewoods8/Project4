@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -17,9 +18,11 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["Name"] != null)
+                SessionManagement sessionID = new SessionManagement();
+                string userID = sessionID.GetUserID();
+                if (userID != null)
                 {
-                    string selectedName = Request.QueryString["Name"];
+                    string selectedName = userID;
 
                     PopulateReviews(selectedName);
                     gvReviews.RowDataBound += gvReviews_RowDataBound;

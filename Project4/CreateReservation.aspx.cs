@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utilities;
+using RestaurantSoapService;
 
 
 namespace Project4
@@ -16,9 +17,11 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["Name"] != null)
+                SessionManagement sessionID = new SessionManagement();
+                string userID = sessionID.GetUserID();
+                if (userID != null)
                 {
-                    string selectedName = Request.QueryString["Name"];
+                    string selectedName = userID;
 
                     txtRestaurant.Text = selectedName;
                     txtRestaurant.ReadOnly = true;
