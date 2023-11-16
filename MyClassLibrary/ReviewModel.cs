@@ -11,7 +11,7 @@ using Utilities;
 
 namespace MyClassLibrary
 {
-    public class Review
+    public class ReviewModel
     {
         public string UserID { get; set; }
         public string Name { get; set; }

@@ -16,7 +16,7 @@ namespace Project4
 {
     public partial class LogIn : System.Web.UI.Page
     {
-        string webApiUrl = "https://localhost:7060/api";
+        string webApiUrl = "https://localhost:7060/api/";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -138,7 +138,7 @@ namespace Project4
 
             try
             {
-                WebRequest request = WebRequest.Create(webApiUrl + "/UserService/AddUser/");
+                WebRequest request = WebRequest.Create(webApiUrl + "UserService/AddUser/");
                 request.Method = "POST";
                 request.ContentLength = jsonUser.Length;
                 request.ContentType = "application/json";

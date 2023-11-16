@@ -35,7 +35,7 @@ namespace Project4
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Review newReview = new Review();
+            ReviewModel newReview = new ReviewModel();
             if (txtUserID.Text == null || txtUserID.Text == "" || txtName.Text == null || txtName.Text == "" ||
                 txtRestaurant.Text == null || txtRestaurant.Text == "" || txtComments.Text == null || txtComments.Text == "" ||
                 string.IsNullOrEmpty(Request.Form["radFood"]) || string.IsNullOrEmpty(Request.Form["radService"]) ||

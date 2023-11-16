@@ -170,8 +170,8 @@
     <Compile Include="Info.cs" />
     <Compile Include="InputValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reservation.cs" />
-    <Compile Include="Review.cs" />
+    <Compile Include="ReservationModel.cs" />
+    <Compile Include="ReviewModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
