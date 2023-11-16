@@ -26,7 +26,7 @@ namespace RestaurantAPI.Controllers
                 SqlCommand objCommand = new SqlCommand();
 
                 objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.CommandText = "CreateUser";
+                objCommand.CommandText = "CreateReview";
 
                 objCommand.CommandType = CommandType.StoredProcedure;
                 objCommand.Parameters.AddWithValue("@UserID", review.UserID);

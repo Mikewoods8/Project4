@@ -30,7 +30,6 @@ namespace RestaurantAPI.Controllers
                 objCommand.CommandType = CommandType.StoredProcedure;
                 objCommand.CommandText = "CreateRestaurant";
 
-                objCommand.CommandType = CommandType.StoredProcedure;
                 objCommand.Parameters.AddWithValue("@Name", restaurant.Name);
                 objCommand.Parameters.AddWithValue("@Category", restaurant.Category);
                 objCommand.Parameters.AddWithValue("@RepresentativeID", restaurant.RepresentativeID);

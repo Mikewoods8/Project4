@@ -15,7 +15,7 @@ namespace MyClassLibrary
     {
         public string Name { get; set; }
         public string Restaurant { get; set; }
-        public DateTime SelectedDate { get; set; }
+        public string Date { get; set; }
         public string Time { get; set; }
     }
 }

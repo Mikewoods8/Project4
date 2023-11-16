@@ -16,7 +16,7 @@ namespace RestaurantAPI.Controllers
     [Route("api/ReservationService")]
     public class ReservationServiceController : Controller
     {
-        // POST api/<Reservation>
+        // POST api/<ReservationService>
         [HttpPost()]
         [HttpPost("AddReservation")]
         public Boolean AddReservation([FromBody] ReservationModel reservation)
@@ -31,7 +31,7 @@ namespace RestaurantAPI.Controllers
 
                 objCommand.Parameters.AddWithValue("@Name", reservation.Name);
                 objCommand.Parameters.AddWithValue("@Restaurant", reservation.Restaurant);
-                objCommand.Parameters.AddWithValue("@Date", reservation.SelectedDate);
+                objCommand.Parameters.AddWithValue("@Date", reservation.Date);
                 objCommand.Parameters.AddWithValue("@Time", reservation.Time);
 
                 int retVal = objDB.DoUpdateUsingCmdObj(objCommand);
@@ -45,5 +45,6 @@ namespace RestaurantAPI.Controllers
                 return false;
             }
         }
+
     }
 }

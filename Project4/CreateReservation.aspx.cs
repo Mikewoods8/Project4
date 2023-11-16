@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using Utilities;
-using MyClassLibrary;
+
+using System.Web.Script.Serialization;
 using System.IO;
 using System.Net;
-using System.Web.Script.Serialization;
+using System.Data;
+using Utilities;
+using MyClassLibrary;
 
 namespace Project4
 {
@@ -21,12 +21,12 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["Name"] != null)
+                 if (Request.QueryString["Name"] != null)
                 {
                     string selectedName = Request.QueryString["Name"];
 
                     txtRestaurant.Text = selectedName;
-                    txtRestaurant.ReadOnly = true;
+                    txtRestaurant.ReadOnly = false;
                 }
             }
         }
@@ -36,22 +36,24 @@ namespace Project4
             lblErrorDate.Visible = false;
             lblErrorName.Visible = false;
 
+            ReservationModel newReservation = new ReservationModel();
+
             if (InputValidation.ValidateReservation(txtName, lblErrorName, CalendarReserve, lblErrorDate) == true)
             {
 
-                ReservationModel reservation = new ReservationModel();
+                newReservation.Name = txtName.Text;
+                newReservation.Restaurant = txtRestaurant.Text;
+                newReservation.Date = CalendarReserve.SelectedDate.ToString();
+                newReservation.Time = ddlTime.SelectedValue;
 
-                reservation.Name = txtName.Text;
-                reservation.Restaurant = txtRestaurant.Text;
-                reservation.SelectedDate = CalendarReserve.SelectedDate;
-                reservation.Time = ddlTime.SelectedValue;
+            }
 
                 JavaScriptSerializer js = new JavaScriptSerializer();
-                String jsonUser = js.Serialize(reservation);
+                String jsonUser = js.Serialize(newReservation);
 
                 try
                 {
-                    WebRequest request = WebRequest.Create(webApiUrl + "ReservationService/AddReservation/");
+                WebRequest request = WebRequest.Create(webApiUrl + "ReservationService/AddReservation");
                     request.Method = "POST";
                     request.ContentLength = jsonUser.Length;
                     request.ContentType = "application/json";
@@ -81,7 +83,7 @@ namespace Project4
                 }
 
             }
-        }
+
         protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
         {
             Response.Redirect("Reviewer.aspx");
