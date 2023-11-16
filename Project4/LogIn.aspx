@@ -2,9 +2,9 @@
 
 <!DOCTYPE html>
 <%-- To Do:
-    Averages
-    Finish Web API DB calls
-    Make responsive
+    Averages (Done)
+    Finish Web API DB calls (Working)
+    Make responsive(script manager ==> update panel ==> content templeate ==> put all controls inside)
     Manage session via web API 
     Modify Reservations
     Add Images
