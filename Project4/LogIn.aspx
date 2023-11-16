@@ -6,6 +6,7 @@
     Finish Web API DB calls (Working)
     Make responsive (Done)
     Manage session via one of the web API (Done)
+    Nothing showing up for reviews after gridview button is clicked
     Modify Reservations
     Add Images
 --%>

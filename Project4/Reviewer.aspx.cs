@@ -108,6 +108,8 @@ namespace Project4
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
 
             if (e.CommandName == "ViewReview")
             {
@@ -128,7 +130,7 @@ namespace Project4
 
                 string selectedName = gvRestaurants.Rows[selectedIndex].Cells[0].Text;
 
-                Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={Session["UserID"]}");
+                Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={userID}");
             }
             else if (e.CommandName == "ViewDetails")
             {

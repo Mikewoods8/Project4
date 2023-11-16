@@ -26,6 +26,7 @@ namespace Project4
 
                     PopulateReviews(selectedName);
                 }
+                gvPersonalReviews.RowDataBound += gvPersonalReviews_RowDataBound;
             }
         }
 
@@ -92,8 +93,27 @@ namespace Project4
                 }
             }
         }
+        protected void gvPersonalReviews_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                TableCell avgRatingHeader = new TableCell();
+                avgRatingHeader.Text = "Average Rating";
+                e.Row.Cells.AddAt(8, avgRatingHeader);
+            }
+            else if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int foodRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "FoodRating"));
+                int serviceRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ServiceRating"));
+                int atmosphereRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "AtmosphereRating"));
+                int priceRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "PriceRating"));
+                double averageRating = (foodRating + serviceRating + atmosphereRating + priceRating) / 4.0;
+                TableCell avgRatingCell = new TableCell();
+                avgRatingCell.Text = averageRating.ToString("0.00");
+                e.Row.Cells.AddAt(8, avgRatingCell);
 
-
+            }
+        }
         private void UpdateReview(int reviewId, string foodRating, string serviceRating, string atmosphereRating, string priceRating, string comments)
         {
             DBConnect db = new DBConnect();

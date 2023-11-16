@@ -26,6 +26,11 @@ namespace Project4
 
                     PopulateRestaurants(selectedName);
                 }
+                else if (Request.QueryString["UserID"] != null)
+                {
+                    string selectedName = Request.QueryString["UserID"];
+                    PopulateRestaurants(selectedName);
+                }
             }
         }
 
