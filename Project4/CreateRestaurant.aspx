@@ -19,6 +19,11 @@
             <asp:Label ID="lblCategory" runat="server" Text="Category:" Font-Bold="True"></asp:Label>
             <br />
             <asp:RadioButtonList ID="radListCategory" runat="server" CssClass="centered-radio-list">
+                <asp:ListItem>American</asp:ListItem>
+                <asp:ListItem>Italian</asp:ListItem>
+                <asp:ListItem>Chinese</asp:ListItem>
+                <asp:ListItem>Barbecue</asp:ListItem>
+                <asp:ListItem>Mexican</asp:ListItem>
             </asp:RadioButtonList>
             <br />
             <asp:Label ID="lblRepId" runat="server" Text="Representative ID:" Font-Bold="True"></asp:Label>

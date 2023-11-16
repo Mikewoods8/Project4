@@ -19,8 +19,6 @@ namespace Project4
             if (!IsPostBack)
             {
                 ShowRestaurants();
-
-                BindCategoryListBox();
             }
         }
         private void ShowRestaurants()
@@ -38,25 +36,6 @@ namespace Project4
             gvRestaurants.DataBind();
 
 
-        }
-        private void BindCategoryListBox()
-        {
-            DBConnect db = new DBConnect();
-
-            string storedProcedureName = "GetCategories";
-
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            DataSet dataSet = db.GetDataSet(cmd);
-
-            if (dataSet.Tables.Count > 0)
-            {
-                chkListCategory.DataSource = dataSet.Tables[0];
-                chkListCategory.DataTextField = "Category";
-                chkListCategory.DataValueField = "Category";
-                chkListCategory.DataBind();
-            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

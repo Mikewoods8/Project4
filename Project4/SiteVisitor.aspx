@@ -16,6 +16,11 @@
         <div id="SearchFunction">
             <asp:Label ID="lblSearch" runat="server" Text="Filter Search:" Font-Size="Larger"></asp:Label>
             <asp:CheckBoxList ID="chkListCategory" runat="server" Font-Bold="True" Font-Size="Large">
+                <asp:ListItem>American</asp:ListItem>
+                <asp:ListItem>Italian</asp:ListItem>
+                <asp:ListItem>Chinese</asp:ListItem>
+                <asp:ListItem>Barbecue</asp:ListItem>
+                <asp:ListItem>Mexican</asp:ListItem>
             </asp:CheckBoxList>
             <br />
             <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
