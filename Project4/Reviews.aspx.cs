@@ -18,15 +18,13 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                SessionManagement sessionID = new SessionManagement();
-                string userID = sessionID.GetUserID();
-                if (userID != null)
+                if (Request.QueryString["Name"] != null)
                 {
-                    string selectedName = userID;
+                    string selectedName = Request.QueryString["Name"];
 
                     PopulateReviews(selectedName);
-                    gvReviews.RowDataBound += gvReviews_RowDataBound;
                 }
+                gvReviews.RowDataBound += gvReviews_RowDataBound;
             }
         }
 

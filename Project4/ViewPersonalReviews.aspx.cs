@@ -143,7 +143,6 @@ namespace Project4
             lblConfirm.Text = "Review successfully deleted.";
         }
 
-
         private void DeleteReview(int reviewId)
         {
             DBConnect db = new DBConnect();
