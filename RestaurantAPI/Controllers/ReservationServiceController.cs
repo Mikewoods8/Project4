@@ -13,8 +13,8 @@ using Utilities;
 namespace RestaurantAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Reservation")]
-    public class ReservationController : Controller
+    [Route("api/ReservationService")]
+    public class ReservationServiceController : Controller
     {
         // POST api/<Reservation>
         [HttpPost()]

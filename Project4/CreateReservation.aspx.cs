@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using System.Web.Script.Serialization;
-using System.IO;
-using System.Net;
 using System.Data;
+using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using System.IO;
+using System.Net;
+using System.Web.Script.Serialization;
 
 namespace Project4
 {
@@ -51,7 +51,7 @@ namespace Project4
 
                 try
                 {
-                    WebRequest request = WebRequest.Create(webApiUrl + "Reservation/AddReservation/");
+                    WebRequest request = WebRequest.Create(webApiUrl + "ReservationService/AddReservation/");
                     request.Method = "POST";
                     request.ContentLength = jsonUser.Length;
                     request.ContentType = "application/json";

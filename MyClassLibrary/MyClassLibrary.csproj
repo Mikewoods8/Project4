@@ -171,6 +171,7 @@
     <Compile Include="InputValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservationModel.cs" />
+    <Compile Include="RestaurantModel.cs" />
     <Compile Include="ReviewModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>

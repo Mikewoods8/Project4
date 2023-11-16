@@ -22,28 +22,6 @@ namespace MyClassLibrary
         public int PriceRating { get; set; }
         public string Comments { get; set; }
 
-        public void CreateReviews()
-        {
-            DBConnect db = new DBConnect();
-            SqlConnection connection = db.GetConnection();
-
-            using (SqlCommand cmd = new SqlCommand("CreateReview", connection))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@UserID", UserID);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@Restaurant", Restaurant);
-                cmd.Parameters.AddWithValue("@FoodRating", FoodRating);
-                cmd.Parameters.AddWithValue("@ServiceRating", ServiceRating);
-                cmd.Parameters.AddWithValue("@AtmosphereRating", AtmosphereRating);
-                cmd.Parameters.AddWithValue("@PriceRating", PriceRating);
-                cmd.Parameters.AddWithValue("@Comments", Comments);
-
-                connection.Open();
-                cmd.ExecuteNonQuery();
-                connection.Close();
-            }
         }
 
     }
-}
