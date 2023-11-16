@@ -18,7 +18,6 @@ namespace RestaurantAPI.Controllers
     public class RestaurantServiceController : Controller
     {
         // POST api/<UserService>
-        [HttpPost()]
         [HttpPost("AddRestaurant")]
         public Boolean AddRestaurant([FromBody] RestaurantModel restaurant)
         {
@@ -45,5 +44,25 @@ namespace RestaurantAPI.Controllers
                 return false;
             }
         }
+
+        [HttpGet("GetRestaurant")]
+        public List<RestaurantModel> Get()
+        {
+            DBConnect objDB = new DBConnect();
+            DataSet ds = objDB.GetDataSet("SELECT * FROM RESTAURANTS");
+            List<RestaurantModel> restaurants = new List<RestaurantModel>();
+            RestaurantModel restaurant;
+
+            foreach(DataRow record in ds.Tables[0].Rows)
+            {
+                restaurant = new RestaurantModel();
+                restaurant.Name = record["Name"].ToString();
+                restaurant.Category = record["Category"].ToString();
+                restaurant.RepresentativeID = record["RepresentativeID"].ToString();
+                restaurants.Add(restaurant);
+            }
+            return restaurants;
+        }
+
     }
 }

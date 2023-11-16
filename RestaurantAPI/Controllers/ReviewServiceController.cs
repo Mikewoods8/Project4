@@ -16,7 +16,6 @@ namespace RestaurantAPI.Controllers
     [Route("api/ReviewService")]
     public class ReviewServiceController : Controller
     {
-        [HttpPost()]
         [HttpPost("AddReview")]
         public Boolean AddReview([FromBody] ReviewModel review)
         {

@@ -10,16 +10,19 @@ using Utilities;
 using MyClassLibrary;
 using System.Web.Services;
 using RestaurantSoapService;
+using System.IO;
+using System.Net;
+using System.Web.Script.Serialization;
 
 namespace Project4
 {
     public partial class Reviewer : System.Web.UI.Page
     {
+        string webApiUrl = "https://localhost:7060/api/";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-
                 ShowRestaurants();
 
             }
@@ -27,16 +30,19 @@ namespace Project4
 
         private void ShowRestaurants()
         {
-            DBConnect db = new DBConnect();
+            WebRequest request = WebRequest.Create(webApiUrl + "RestaurantService/GetRestaurant/");
+            WebResponse response = request.GetResponse();
 
-            string storedProcedureName = "GetRestaurants";
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            String data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
 
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
 
-            DataSet dataSet = db.GetDataSet(cmd);
-
-            gvRestaurants.DataSource = dataSet;
+            gvRestaurants.DataSource = restaurants;
             gvRestaurants.DataBind();
         }
 

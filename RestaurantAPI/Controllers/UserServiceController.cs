@@ -19,7 +19,6 @@ namespace RestaurantAPI.Controllers
     public class UserServiceController : Controller
     {
         // POST api/<UserService>
-        [HttpPost()]
         [HttpPost("AddUser")]
         public Boolean AddUser([FromBody] UserModel user)
         {

@@ -17,7 +17,6 @@ namespace RestaurantAPI.Controllers
     public class ReservationServiceController : Controller
     {
         // POST api/<ReservationService>
-        [HttpPost()]
         [HttpPost("AddReservation")]
         public Boolean AddReservation([FromBody] ReservationModel reservation)
         {
