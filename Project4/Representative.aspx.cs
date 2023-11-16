@@ -102,15 +102,17 @@ namespace Project4
                         filteredData.Merge(dataSet.Tables[0]);
                     }
                 }
-
                 gvRestaurants.DataSource = filteredData;
                 gvRestaurants.DataBind();
+                UpdatePanel1.Update();
             }
         }
 
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
 
             if (e.CommandName == "ViewReview")
             {
@@ -130,14 +132,15 @@ namespace Project4
 
                 string selectedName = gvRestaurants.Rows[selectedIndex].Cells[0].Text;
 
-                Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={Session["UserID"]}");
+                Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={userID}");
             }
             else if (e.CommandName == "ViewDetails")
             {
                 string selectedName = gvRestaurants.Rows[rowIndex].Cells[0].Text;
                 ViewInfo service = new ViewInfo();
                 Info details = service.GetRestaurantDetails(selectedName);
-                ClientScript.RegisterStartupScript(this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
+
             }
         }
 

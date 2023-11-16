@@ -124,7 +124,7 @@ namespace Project4
                 string selectedName = gvRestaurants.Rows[rowIndex].Cells[0].Text;
                 ViewInfo service = new ViewInfo();
                 Info details = service.GetRestaurantDetails(selectedName);
-                ClientScript.RegisterStartupScript(this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
             }
         }
 

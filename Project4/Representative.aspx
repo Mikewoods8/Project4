@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div id="title">
                     <asp:Button ID="btnLogOut" runat="server" Text="Log Out" BackColor="#FF3300" BorderStyle="Solid" Font-Size="Large" OnClick="btnLogOut_Click" />
@@ -42,13 +42,11 @@
                                     <asp:Button ID="btnReservation" runat="server" Text="Make Reservation" CommandName="MakeReservation" CommandArgument='<%# Container.DataItemIndex %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-
                             <asp:TemplateField HeaderText="Reviews">
                                 <ItemTemplate>
                                     <asp:Button ID="btnReviews" runat="server" Text="View Reviews" CommandName="ViewReview" CommandArgument='<%# Container.DataItemIndex %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-
                             <asp:TemplateField HeaderText="Write a Review">
                                 <ItemTemplate>
                                     <asp:Button ID="btnWriteReviews" runat="server" Text="Write a Review" CommandName="WriteReview" CommandArgument='<%# Container.DataItemIndex %>' />

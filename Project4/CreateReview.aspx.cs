@@ -20,10 +20,9 @@ namespace Project4
             {
                 SessionManagement sessionID = new SessionManagement();
                 string userID = sessionID.GetUserID();
-                SessionManagement sessionName = new SessionManagement();
-                string name = sessionName.GetName();
-                if (name != null)
+                if (Request.QueryString["Name"] != null)
                 {
+                    string name = Request.QueryString["Name"];
                     txtRestaurant.Text = name;
                     txtRestaurant.ReadOnly = true;
                 }
