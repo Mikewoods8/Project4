@@ -32,6 +32,7 @@ namespace Project4
             }
         }
 
+        //method to populate revies for a restauarnt using web api 
         private void PopulateReviews(string restaurantName)
         {
             WebRequest request = WebRequest.Create(webApiUrl + $"ReviewService/GetReviewByRestaurant?restaurantName={restaurantName}");
@@ -50,7 +51,7 @@ namespace Project4
             gvReviews.DataBind();
         }
         
-
+        //method to handle average ratings for a review
         protected void gvReviews_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Header)

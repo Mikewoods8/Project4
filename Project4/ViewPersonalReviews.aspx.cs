@@ -33,6 +33,7 @@ namespace Project4
             }
         }
 
+        //method to handle viewing your reviews using web api
         private void PopulateReviews(string userId)
         {
                 WebRequest request = WebRequest.Create(webApiUrl + $"ReviewService/GetReviewById?userId={userId}");
@@ -51,6 +52,7 @@ namespace Project4
                 gvPersonalReviews.DataBind();
             }
         
+        //method to handle row commands
         protected void gvReviews_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             SessionManagement sessionID = new SessionManagement();
@@ -95,6 +97,8 @@ namespace Project4
                 }
             }
         }
+
+        //method to handle showing review averages
         protected void gvPersonalReviews_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Header)
@@ -116,6 +120,8 @@ namespace Project4
 
             }
         }
+
+        //method to update reviews to database (need to implement web api)
         private void UpdateReview(int reviewId, string foodRating, string serviceRating, string atmosphereRating, string priceRating, string comments)
         {
             DBConnect db = new DBConnect();
@@ -145,6 +151,7 @@ namespace Project4
             lblConfirm.Text = "Review successfully deleted.";
         }
 
+        //method to handle deleting a review from the database (need to implement web api)
         private void DeleteReview(int reviewId)
         {
             DBConnect db = new DBConnect();

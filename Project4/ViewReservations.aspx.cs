@@ -33,6 +33,7 @@ namespace Project4
             }
         }
 
+        //method to handle seeing reservations for a representatives restuarnat (need to modify)
         private void PopulateReviews(string restaurantName)
         {
             WebRequest request = WebRequest.Create(webApiUrl + $"ReservationService/GetReservationByRestaurant?selectedName={restaurantName}");

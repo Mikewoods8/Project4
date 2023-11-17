@@ -24,6 +24,7 @@ namespace Project4
             }
         }
 
+        //Method to create a restaurant using web api
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             RestaurantModel newRestaurant = new RestaurantModel();

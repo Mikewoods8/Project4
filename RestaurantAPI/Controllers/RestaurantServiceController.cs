@@ -93,5 +93,35 @@ namespace RestaurantAPI.Controllers
             return restaurants;
         }
 
+        [HttpGet("GetRestaurantByCategory")]
+        public List<RestaurantModel> GetRestaurantByCategory(string category)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetRestaurantByCategory";
+
+            objCommand.Parameters.AddWithValue("@Category", category);
+
+            DataSet ds = objDB.GetDataSet(objCommand);
+
+            List<RestaurantModel> restaurants = new List<RestaurantModel>();
+            RestaurantModel restaurant;
+
+            foreach (DataRow record in ds.Tables[0].Rows)
+            {
+                restaurant = new RestaurantModel();
+                restaurant.Name = record["Name"].ToString();
+                restaurant.Category = record["Category"].ToString();
+                restaurants.Add(restaurant);
+            }
+
+            objDB.CloseConnection();
+
+            return restaurants;
+        }
+
+
+
     }
 }

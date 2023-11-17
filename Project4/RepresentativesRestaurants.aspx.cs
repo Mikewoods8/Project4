@@ -9,11 +9,16 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 using RestaurantSoapService;
+using System.IO;
+using System.Net;
+using System.Web.Script.Serialization;
 
 namespace Project4
 {
     public partial class RepresentativesRestaurants : System.Web.UI.Page
     {
+        string webApiUrl = "https://localhost:7060/api/";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -34,26 +39,27 @@ namespace Project4
             }
         }
 
+        //Method to populate restaurants using web api get restaurants by id
         private void PopulateRestaurants(string userId)
         {
-            DBConnect db = new DBConnect();
+            WebRequest request = WebRequest.Create(webApiUrl + $"RestaurantService/GetRestaurantById?userId={userId}");
+            WebResponse response = request.GetResponse();
 
-            string storedProcedureName = "GetRestaurantsByID";
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            String data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
 
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
 
-            cmd.Parameters.AddWithValue("@UserId", userId);
+            gvRestaurants.DataSource = restaurants;
+            gvRestaurants.DataBind();
 
-            DataSet dataSet = db.GetDataSet(cmd);
-
-            if (dataSet.Tables.Count > 0)
-            {
-                gvRestaurants.DataSource = dataSet.Tables[0];
-                gvRestaurants.DataBind();
-            }
         }
 
+        //method to handle row commands
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
@@ -96,6 +102,7 @@ namespace Project4
             lblConfirm.Text = "Restaurant succesfully updated.";
         }
 
+        //method to handle updating into the database (need to implment web api)
         private void UpdateRestaurant(int id, string name, string category)
         {
             DBConnect db = new DBConnect();

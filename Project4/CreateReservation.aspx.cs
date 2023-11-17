@@ -37,6 +37,7 @@ namespace Project4
             }
         }
 
+        //Method to create a reservation using web api
         protected void btnCreateReservation_Click(object sender, EventArgs e)
         {
             lblErrorDate.Visible = false;

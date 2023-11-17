@@ -23,6 +23,7 @@ namespace Project4
 
         }
 
+        //Some code for login page display
         protected void btnLogIn_Click(object sender, EventArgs e)
         {
             lblCreateAccountMessage.Visible = false;
@@ -61,11 +62,13 @@ namespace Project4
             btnSubmit.Visible = true;
         }
 
+        //Redirects to site visitor page 
         protected void btnGuest_Click(object sender, EventArgs e)
         {
             Response.Redirect("SiteVisitor.aspx");
         }
 
+        //Redirects to respective user page (Need to implement web api)
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             string userID = txtUserID.Text;
@@ -77,6 +80,7 @@ namespace Project4
             LoginModel.Login(userID, password, lblErrorLogIn);
         }
 
+        ////Some code for login page display
         protected void btnCreateAccount_Click(object sender, EventArgs e)
         {
             lblMessage.Visible = false;
@@ -101,6 +105,7 @@ namespace Project4
             btnSubmitAccount.Visible = true;
         }
 
+        //Method to create a new user using web api
         protected void btnSubmitAccount_Click(object sender, EventArgs e)
         {
             lblErrorId.Visible = false;

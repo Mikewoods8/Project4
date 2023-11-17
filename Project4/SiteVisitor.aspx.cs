@@ -25,6 +25,8 @@ namespace Project4
                 ShowRestaurants();
             }
         }
+
+        //method to handle displaying restaurants using web api
         private void ShowRestaurants()
         {
             WebRequest request = WebRequest.Create(webApiUrl + "RestaurantService/GetRestaurant/");
@@ -43,8 +45,10 @@ namespace Project4
             gvRestaurants.DataBind();
         }
 
+        //method to handle searching a restaurant using web api
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+
             List<string> selectedCategories = new List<string>();
 
             foreach (ListItem item in chkListCategory.Items)
@@ -55,38 +59,38 @@ namespace Project4
                 }
             }
 
-            DataTable filteredData = new DataTable();
-
             if (selectedCategories.Count == 0)
             {
                 ShowRestaurants();
             }
             else
             {
+                List<RestaurantModel> allRestaurants = new List<RestaurantModel>();
+
                 foreach (string category in selectedCategories)
                 {
-                    DBConnect db = new DBConnect();
+                    WebRequest request = WebRequest.Create(webApiUrl + $"RestaurantService/GetRestaurantByCategory?category={category}");
+                    WebResponse response = request.GetResponse();
 
-                    string storedProcedureName = "GetRestaurantByCategory";
+                    Stream theDataStream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(theDataStream);
+                    String data = reader.ReadToEnd();
+                    reader.Close();
+                    response.Close();
 
-                    SqlCommand cmd = new SqlCommand(storedProcedureName);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
 
-                    cmd.Parameters.AddWithValue("@Category", category);
-
-                    DataSet dataSet = db.GetDataSet(cmd);
-
-                    if (dataSet.Tables.Count > 0)
-                    {
-                        filteredData.Merge(dataSet.Tables[0]);
-                    }
+                    allRestaurants.AddRange(restaurants);
                 }
 
-                gvRestaurants.DataSource = filteredData;
-                gvRestaurants.DataBind();
-            }
-        }
+                gvRestaurants.DataSource = allRestaurants;
+                    gvRestaurants.DataBind();
 
+                }
+            }
+
+        //method to handle row commands
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
