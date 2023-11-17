@@ -22,15 +22,21 @@
                 <div id="SearchFunction">
                     <asp:Label ID="lblSearch" runat="server" Text="Filter Search:" Font-Size="Larger"></asp:Label>
                     <asp:CheckBoxList ID="chkListCategory" runat="server" Font-Bold="True" Font-Size="Large">
+                        <asp:ListItem Text="American" Value="American" />
+                        <asp:ListItem Text="Italian" Value="Italian" />
+                        <asp:ListItem Text="Barbecue" Value="Barbeque" />
+                        <asp:ListItem Text="Mexican" Value="Mexican" />
+                        <asp:ListItem Text="Chinese" Value="Chinese" />
                     </asp:CheckBoxList>
                     <br />
                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
                 </div>
                 <div id="GridView">
-                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="False" OnRowCommand="gvRestaurants_RowCommand">
+                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="False" OnRowCommand="gvRestaurants_RowCommand" RowDataBound="gvRestaurants_RowDataBound">
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                             <asp:BoundField DataField="Category" HeaderText="Category" ReadOnly="true" />
+                            <asp:ImageField DataImageUrlField="Image" HeaderText="Image" ControlStyle-Width="50" ControlStyle-Height="50" />
                             <asp:TemplateField HeaderText="Details">
                                 <ItemTemplate>
                                     <asp:Button ID="btnDetails" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Container.DataItemIndex %>' />

@@ -63,6 +63,10 @@ namespace Project4
 
         protected void btnGuest_Click(object sender, EventArgs e)
         {
+            string userID = "Guest";
+            SessionManagement userSession = new SessionManagement();
+            userSession.SetUserID(userID);
+
             Response.Redirect("SiteVisitor.aspx");
         }
 

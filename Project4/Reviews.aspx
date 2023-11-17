@@ -21,6 +21,7 @@
                     </asp:GridView>
                 </div>
                 <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
+                <asp:HiddenField runat="server" ID="hdnReferringPageUrl" />
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>

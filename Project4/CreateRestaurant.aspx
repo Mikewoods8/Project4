@@ -32,6 +32,7 @@
                     <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" BackColor="#3399FF" Font-Size="Large" />
                     <asp:Label ID="lblConfirm" runat="server"></asp:Label><br />
                     <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" /><br />
+                    <asp:HiddenField runat="server" ID="hdnReferringPageUrl" />
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

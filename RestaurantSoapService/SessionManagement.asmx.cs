@@ -16,18 +16,19 @@ namespace RestaurantSoapService
         [WebMethod(EnableSession = true)]
         public void SetUserID(string userID)
         {
-            Session["UserID"] = userID;
+            HttpContext.Current.Session["UserID"] = userID;
         }
 
         [WebMethod(EnableSession = true)]
         public string GetUserID()
         {
-            if (Session["UserID"] != null)
+            if (HttpContext.Current.Session["UserID"] != null)
             {
-                return Session["UserID"].ToString();
+                return HttpContext.Current.Session["UserID"].ToString();
             }
             return null;
         }
+
 
         [WebMethod(EnableSession = true)]
         public void SetName(string name)

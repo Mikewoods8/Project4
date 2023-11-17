@@ -56,6 +56,7 @@
                     <br />
                     <asp:Button ID="btnCreateReservation" runat="server" Text="Create Reservation" OnClick="btnCreateReservation_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
                     <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" /><br />
+                    <asp:HiddenField runat="server" ID="hdnReferringPageUrl" />
                     <asp:Label ID="lblConfirm" runat="server"></asp:Label>
                     <br />
                 </div>

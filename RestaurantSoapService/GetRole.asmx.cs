@@ -18,18 +18,26 @@ namespace RestaurantSoapService
     {
 
         [WebMethod]
-        public bool GetUserRole()
+        public string GetUserRole(string userID)
         {
-            SessionManagement sessionID = new SessionManagement();
-            string userID = sessionID.GetUserID();
+            if (string.IsNullOrEmpty(userID))
+            {
+                return "Guest";
+            }
             DBConnect db = new DBConnect();
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetRole";
             cmd.Parameters.AddWithValue("@UserID", userID);
-            cmd.Parameters.AddWithValue("@Role", "Reviewer");
             DataSet roleDataSet = db.GetDataSetUsingCmdObj(cmd);
-            return roleDataSet.Tables.Count > 0 && roleDataSet.Tables[0].Rows.Count > 0;
+            if (roleDataSet.Tables.Count > 0 && roleDataSet.Tables[0].Rows.Count > 0)
+            {
+                return roleDataSet.Tables[0].Rows[0]["Role"].ToString();
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }
