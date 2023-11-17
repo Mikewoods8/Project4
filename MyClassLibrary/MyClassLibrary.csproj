@@ -166,7 +166,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountConfirmation.cs" />
+    <Compile Include="LoginModel.cs" />
     <Compile Include="Info.cs" />
     <Compile Include="InputValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

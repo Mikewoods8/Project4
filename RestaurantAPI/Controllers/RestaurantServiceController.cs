@@ -46,7 +46,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpGet("GetRestaurant")]
-        public List<RestaurantModel> Get()
+        public List<RestaurantModel> GetRestaurant()
         {
             DBConnect objDB = new DBConnect();
             DataSet ds = objDB.GetDataSet("SELECT * FROM RESTAURANTS");
@@ -61,6 +61,35 @@ namespace RestaurantAPI.Controllers
                 restaurant.RepresentativeID = record["RepresentativeID"].ToString();
                 restaurants.Add(restaurant);
             }
+            return restaurants;
+        }
+
+        [HttpGet("GetRestaurantById")]
+        public List<RestaurantModel> GetRestaurantById(string userId)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetRestaurantsByID";
+
+            objCommand.Parameters.AddWithValue("@UserId", userId);
+
+            DataSet ds = objDB.GetDataSet(objCommand);
+
+            List<RestaurantModel> restaurants = new List<RestaurantModel>();
+            RestaurantModel restaurant;
+
+            foreach (DataRow record in ds.Tables[0].Rows)
+            {
+                restaurant = new RestaurantModel();
+                restaurant.Name = record["Name"].ToString();
+                restaurant.Category = record["Category"].ToString();
+                restaurant.RepresentativeID = record["RepresentativeID"].ToString();
+                restaurants.Add(restaurant);
+            }
+
+            objDB.CloseConnection();
+
             return restaurants;
         }
 

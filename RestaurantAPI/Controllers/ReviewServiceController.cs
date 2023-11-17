@@ -28,7 +28,7 @@ namespace RestaurantAPI.Controllers
                 objCommand.CommandText = "CreateReview";
 
                 objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.Parameters.AddWithValue("@UserID", review.UserID);
+                objCommand.Parameters.AddWithValue("@UserID", review.UserId);
                 objCommand.Parameters.AddWithValue("@Name", review.Name);
                 objCommand.Parameters.AddWithValue("@Restaurant", review.Restaurant);
                 objCommand.Parameters.AddWithValue("@FoodRating", review.FoodRating);
@@ -49,5 +49,73 @@ namespace RestaurantAPI.Controllers
             }
         }
 
+        [HttpGet("GetReviewByRestaurant")]
+        public List<ReviewModel> GetReviewsByRestaurant(string restaurantName)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetRestaurantReviews";
+
+            objCommand.Parameters.AddWithValue("@RestaurantName", restaurantName);
+
+            DataSet ds = objDB.GetDataSet(objCommand);
+
+            List<ReviewModel> reviews = new List<ReviewModel>();
+            ReviewModel review;
+
+            foreach (DataRow record in ds.Tables[0].Rows)
+            {
+                review = new ReviewModel();
+                review.UserId = record["UserID"].ToString();
+                review.Name = record["Name"].ToString();
+                review.Restaurant = record["Restaurant"].ToString();
+                review.FoodRating = Convert.ToInt32(record["FoodRating"]);
+                review.ServiceRating = Convert.ToInt32(record["ServiceRating"]);
+                review.AtmosphereRating = Convert.ToInt32(record["AtmosphereRating"]);
+                review.PriceRating = Convert.ToInt32(record["PriceRating"]);
+                review.Comments = record["Comments"].ToString();
+                reviews.Add(review);
+            }
+
+            objDB.CloseConnection();
+
+            return reviews;
+        }
+
+        [HttpGet("GetReviewById")]
+        public List<ReviewModel> GetReviewsById(string userId)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetReviewsByID";
+
+            objCommand.Parameters.AddWithValue("@UserId", userId);
+
+            DataSet ds = objDB.GetDataSet(objCommand);
+
+            List<ReviewModel> reviews = new List<ReviewModel>();
+            ReviewModel review;
+
+            foreach (DataRow record in ds.Tables[0].Rows)
+            {
+                review = new ReviewModel();
+                review.UserId = record["UserID"].ToString();
+                review.Name = record["Name"].ToString();
+                review.Restaurant = record["Restaurant"].ToString();
+                review.FoodRating = Convert.ToInt32(record["FoodRating"]);
+                review.ServiceRating = Convert.ToInt32(record["ServiceRating"]);
+                review.AtmosphereRating = Convert.ToInt32(record["AtmosphereRating"]);
+                review.PriceRating = Convert.ToInt32(record["PriceRating"]);
+                review.Comments = record["Comments"].ToString();
+                reviews.Add(review);
+            }
+
+            objDB.CloseConnection();
+
+            return reviews;
+        }
     }
+
 }

@@ -74,7 +74,7 @@ namespace Project4
             SessionManagement userSession = new SessionManagement();
             userSession.SetUserID(userID);
 
-            AccountConfirmation.Login(userID, password, lblErrorLogIn);
+            LoginModel.Login(userID, password, lblErrorLogIn);
         }
 
         protected void btnCreateAccount_Click(object sender, EventArgs e)

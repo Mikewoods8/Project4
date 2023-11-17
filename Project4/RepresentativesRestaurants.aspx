@@ -14,9 +14,8 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div id="GridView">
-                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="false" OnRowCommand="gvRestaurants_RowCommand" OnRowUpdating="gvRestaurants_RowUpdating" DataKeyNames="Id">
+                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="False" OnRowCommand="gvRestaurants_RowCommand" OnRowUpdating="gvRestaurants_RowUpdating">
                         <Columns>
-                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="true" />
                             <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                             <asp:BoundField DataField="Category" HeaderText="Category" ReadOnly="true" />
                             <asp:BoundField DataField="RepresentativeID" HeaderText="Representative ID" ReadOnly="true" />

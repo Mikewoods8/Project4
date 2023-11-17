@@ -15,9 +15,8 @@
             <ContentTemplate>
                 <div id="GridView">
                     <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" /><br />
-                    <asp:GridView ID="gvPersonalReviews" runat="server" AutoGenerateColumns="false" OnRowCommand="gvReviews_RowCommand" OnRowDeleting="gvReviews_RowDeleting" OnRowUpdating="gvPersonalReviews_RowUpdating" DataKeyNames="Id" OnRowDataBound="gvPersonalReviews_RowDataBound">
+                    <asp:GridView ID="gvPersonalReviews" runat="server" AutoGenerateColumns="False" OnRowCommand="gvReviews_RowCommand" OnRowDeleting="gvReviews_RowDeleting" OnRowUpdating="gvPersonalReviews_RowUpdating" OnRowDataBound="gvPersonalReviews_RowDataBound">
                         <Columns>
-                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="true" />
                             <asp:BoundField DataField="UserId" HeaderText="UserId" ReadOnly="true" />
                             <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                             <asp:BoundField DataField="Restaurant" HeaderText="Restaurant" ReadOnly="true" />
@@ -41,7 +40,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Delete">
                                 <ItemTemplate>
-                                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' />
+                                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Container.DataItemIndex %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

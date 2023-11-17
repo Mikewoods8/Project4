@@ -9,11 +9,15 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 using RestaurantSoapService;
+using System.IO;
+using System.Net;
+using System.Web.Script.Serialization;
 
 namespace Project4
 {
     public partial class ViewPersonalReviews : System.Web.UI.Page
     {
+        private string webApiUrl = "https://localhost:7060/api/";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,9 +26,8 @@ namespace Project4
                 string userID = sessionID.GetUserID();
                 if (userID != null)
                 {
-                    string selectedName = userID;
 
-                    PopulateReviews(selectedName);
+                    PopulateReviews(userID);
                 }
                 gvPersonalReviews.RowDataBound += gvPersonalReviews_RowDataBound;
             }
@@ -32,23 +35,22 @@ namespace Project4
 
         private void PopulateReviews(string userId)
         {
-            DBConnect db = new DBConnect();
+                WebRequest request = WebRequest.Create(webApiUrl + $"ReviewService/GetReviewById?userId={userId}");
+                WebResponse response = request.GetResponse();
 
-            string storedProcedureName = "GetReviewsByID";
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                String data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
 
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                ReviewModel[] reviews = js.Deserialize<ReviewModel[]>(data);
 
-            cmd.Parameters.AddWithValue("@UserId", userId);
-
-            DataSet dataSet = db.GetDataSet(cmd);
-
-            if (dataSet.Tables.Count > 0)
-            {
-                gvPersonalReviews.DataSource = dataSet.Tables[0];
+                gvPersonalReviews.DataSource = reviews;
                 gvPersonalReviews.DataBind();
             }
-        }
+        
         protected void gvReviews_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             SessionManagement sessionID = new SessionManagement();

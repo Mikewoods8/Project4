@@ -11,7 +11,7 @@ using Utilities;
 
 namespace MyClassLibrary
 {
-    public class AccountConfirmation
+    public class LoginModel
     {
         public static void Login(string id, string userPassword, Label lblError)
         {

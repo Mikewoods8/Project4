@@ -45,5 +45,35 @@ namespace RestaurantAPI.Controllers
             }
         }
 
+        [HttpGet("GetReservationByRestaurant")]
+        public List<ReservationModel> GetReservationByRestaurant(string selectedName)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetRestaurantsByReservation";
+
+            objCommand.Parameters.AddWithValue("@RestaurantName", selectedName);
+
+            DataSet ds = objDB.GetDataSet(objCommand);
+
+            List<ReservationModel> reservations = new List<ReservationModel>();
+            ReservationModel reservation;
+
+            foreach (DataRow record in ds.Tables[0].Rows)
+            {
+                reservation = new ReservationModel();
+                reservation.Name = record["Name"].ToString();
+                reservation.Restaurant = record["Restaurant"].ToString();
+                reservation.Date = record["Date"].ToString();
+                reservation.Time = record["Time"].ToString();
+                reservations.Add(reservation);
+            }
+
+            objDB.CloseConnection();
+
+            return reservations;
+        }
+
     }
 }

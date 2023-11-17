@@ -9,11 +9,15 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 using RestaurantSoapService;
+using System.IO;
+using System.Net;
+using System.Web.Script.Serialization;
 
 namespace Project4
 {
     public partial class Reviews : System.Web.UI.Page
     {
+        string webApiUrl = "https://localhost:7060/api/";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -30,23 +34,22 @@ namespace Project4
 
         private void PopulateReviews(string restaurantName)
         {
-            DBConnect db = new DBConnect();
+            WebRequest request = WebRequest.Create(webApiUrl + $"ReviewService/GetReviewByRestaurant?restaurantName={restaurantName}");
+            WebResponse response = request.GetResponse();
 
-            string storedProcedureName = "GetRestaurantReviews";
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            String data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
 
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            ReviewModel[] reviews = js.Deserialize<ReviewModel[]>(data);
 
-            cmd.Parameters.AddWithValue("@RestaurantName", restaurantName);
-
-            DataSet dataSet = db.GetDataSet(cmd);
-
-            if (dataSet.Tables.Count > 0)
-            {
-                gvReviews.DataSource = dataSet.Tables[0];
-                gvReviews.DataBind();
-            }
+            gvReviews.DataSource = reviews;
+            gvReviews.DataBind();
         }
+        
 
         protected void gvReviews_RowDataBound(object sender, GridViewRowEventArgs e)
         {

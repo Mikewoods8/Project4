@@ -51,7 +51,7 @@ namespace Project4
             else
             {
                 lblConfirm.Text = "";
-                newReview.UserID = txtUserID.Text;
+                newReview.UserId = txtUserID.Text;
                 newReview.Name = txtName.Text;
                 newReview.Restaurant = txtRestaurant.Text;
                 newReview.FoodRating = int.Parse(Request.Form["radFood"]);
