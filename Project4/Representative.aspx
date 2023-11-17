@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
@@ -57,6 +58,7 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
+  
     </form>
 </body>
 </html>

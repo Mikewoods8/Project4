@@ -9,54 +9,38 @@ using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
 using RestaurantSoapService;
+using System.Net;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace Project4
 {
     public partial class SiteVisitor : System.Web.UI.Page
     {
+        string webApiUrl = "https://localhost:7060/api/";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 ShowRestaurants();
-
-                BindCategoryListBox();
             }
         }
         private void ShowRestaurants()
         {
-            DBConnect db = new DBConnect();
+            WebRequest request = WebRequest.Create(webApiUrl + "RestaurantService/GetRestaurant/");
+            WebResponse response = request.GetResponse();
 
-            string storedProcedureName = "GetRestaurants";
+            Stream theDataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(theDataStream);
+            String data = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
 
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
 
-            DataSet dataSet = db.GetDataSet(cmd);
-
-            gvRestaurants.DataSource = dataSet;
+            gvRestaurants.DataSource = restaurants;
             gvRestaurants.DataBind();
-
-
-        }
-        private void BindCategoryListBox()
-        {
-            DBConnect db = new DBConnect();
-
-            string storedProcedureName = "GetCategories";
-
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            DataSet dataSet = db.GetDataSet(cmd);
-
-            if (dataSet.Tables.Count > 0)
-            {
-                chkListCategory.DataSource = dataSet.Tables[0];
-                chkListCategory.DataTextField = "Category";
-                chkListCategory.DataValueField = "Category";
-                chkListCategory.DataBind();
-            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
