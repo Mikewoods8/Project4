@@ -14,7 +14,6 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div id="GridView">
-                    <asp:Button ID="btnReturnToRestaurants" runat="server" Text="Return to the Restaurant Page" OnClick="btnReturnToRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" /><br />
                     <asp:GridView ID="gvPersonalReviews" runat="server" AutoGenerateColumns="False" OnRowCommand="gvReviews_RowCommand" OnRowDeleting="gvReviews_RowDeleting" OnRowUpdating="gvPersonalReviews_RowUpdating" OnRowDataBound="gvPersonalReviews_RowDataBound">
                         <Columns>
                             <asp:BoundField DataField="UserId" HeaderText="UserId" ReadOnly="true" />

@@ -153,24 +153,6 @@ namespace Project4
             }
         }
 
-        //protected void gvRestaurants_RowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-        //        GetRole getRole = new GetRole();
-        //        string role = getRole.GetUserRole();
-
-        //        // Assuming "Write a Review" column is the one you want to hide
-        //        Button btnWriteReviews = (Button)e.Row.FindControl("btnWriteReviews");
-
-        //        if (role != "Reviewer" && btnWriteReviews != null)
-        //        {
-        //            // Hide the "Write a Review" button
-        //            btnWriteReviews.Visible = false;
-        //        }
-        //    }
-        //}
-
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
             Response.Redirect("LogIn.aspx");
