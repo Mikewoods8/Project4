@@ -23,10 +23,13 @@ namespace Project4
         {
             if (!IsPostBack)
             {
+                GetRole getRole = new GetRole();
+                bool isReviewer = getRole.GetUserRole();
+                gvRestaurants.Columns[gvRestaurants.Columns.Count - 1].Visible = isReviewer;
                 ShowRestaurants();
-
             }
         }
+
 
         private void ShowRestaurants()
         {

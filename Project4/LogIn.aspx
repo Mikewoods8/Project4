@@ -11,7 +11,7 @@
     Add Images
     Search box not showing (Not finished when pulled from master branch?)
     When you login as a restaurant rep or guest, when you go back to the restaurants page you are set to a reviewer
-    Reps can also write reviews (Need to hide based on user type)
+    Fix write review column for reps
 --%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
