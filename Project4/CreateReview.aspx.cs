@@ -11,6 +11,7 @@ using System.Net;
 using System.Data;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -21,16 +22,16 @@ namespace Project4
         {
             if (!IsPostBack)
             {
+                SessionManagement sessionID = new SessionManagement();
+                string userID = sessionID.GetUserID();
                 if (Request.QueryString["Name"] != null)
                 {
                     string name = Request.QueryString["Name"];
                     txtRestaurant.Text = name;
                     txtRestaurant.ReadOnly = true;
                 }
-
-                if (Request.QueryString["UserID"] != null)
+                if (userID != null)
                 {
-                    string userID = Request.QueryString["UserID"];
                     txtUserID.Text = userID;
                     txtUserID.ReadOnly = true;
                 }

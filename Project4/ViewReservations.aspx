@@ -9,14 +9,17 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="GridView">
-
-            <asp:GridView ID="gvReservations" runat="server">
-            </asp:GridView>
-
-        </div>
-        <asp:Button ID="btnReturnToYourRestaurants" runat="server" Text="Return to Your Restaurants" OnClick="btnReturnToYourRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
-
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div id="GridView">
+                    <asp:GridView ID="gvReservations" runat="server">
+                    </asp:GridView>
+                </div>
+                <asp:Button ID="btnReturnToYourRestaurants" runat="server" Text="Return to Your Restaurants" OnClick="btnReturnToYourRestaurants_Click" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
 </body>
 </html>

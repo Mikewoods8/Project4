@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -17,9 +18,11 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["RestaurantName"] != null)
+                SessionManagement sessionRestaurantName = new SessionManagement();
+                string restaurantName = sessionRestaurantName.GetRestaurantName();
+                if (restaurantName != null)
                 {
-                    string selectedName = Request.QueryString["RestaurantName"];
+                    string selectedName = restaurantName;
 
                     PopulateReviews(selectedName);
                 }

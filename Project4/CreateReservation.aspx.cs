@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilities;
+using RestaurantSoapService;
 using System.Web.Script.Serialization;
 using System.IO;
 using System.Net;
 using System.Data;
-using Utilities;
 using MyClassLibrary;
 
 namespace Project4
@@ -21,9 +22,14 @@ namespace Project4
         {
             if (!IsPostBack)
             {
+                SessionManagement sessionID = new SessionManagement();
+                string userID = sessionID.GetUserID();
+                if (userID != null)
+
                  if (Request.QueryString["Name"] != null)
+
                 {
-                    string selectedName = Request.QueryString["Name"];
+                    string selectedName = userID;
 
                     txtRestaurant.Text = selectedName;
                     txtRestaurant.ReadOnly = false;

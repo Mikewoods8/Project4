@@ -93,6 +93,8 @@ namespace Project4
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
 
             if (e.CommandName == "ViewReview")
             {
@@ -113,14 +115,14 @@ namespace Project4
 
                 string selectedName = gvRestaurants.Rows[selectedIndex].Cells[0].Text;
 
-                Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={Session["UserID"]}");
+                Response.Redirect($"CreateReview.aspx?Name={selectedName}&UserID={userID}");
             }
             else if (e.CommandName == "ViewDetails")
             {
                 string selectedName = gvRestaurants.Rows[rowIndex].Cells[0].Text;
                 ViewInfo service = new ViewInfo();
                 Info details = service.GetRestaurantDetails(selectedName);
-                ClientScript.RegisterStartupScript(this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
             }
         }
 
@@ -131,7 +133,9 @@ namespace Project4
 
         protected void btnViewPersonalReviews_Click(object sender, EventArgs e)
         {
-            Response.Redirect($"ViewPersonalReviews.aspx?UserID={Session["UserID"]}");
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
+            Response.Redirect($"ViewPersonalReviews.aspx?UserID={userID}");
         }
 
         protected void btnAddRestaurant_Click(object sender, EventArgs e)

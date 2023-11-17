@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -17,10 +18,17 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["UserID"] != null)
+                SessionManagement sessionID = new SessionManagement();
+                string userID = sessionID.GetUserID();
+                if (userID != null)
+                {
+                    string selectedName = userID;
+
+                    PopulateRestaurants(selectedName);
+                }
+                else if (Request.QueryString["UserID"] != null)
                 {
                     string selectedName = Request.QueryString["UserID"];
-
                     PopulateRestaurants(selectedName);
                 }
             }
@@ -49,12 +57,14 @@ namespace Project4
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
+            SessionManagement sessionID = new SessionManagement();
+            string userID = sessionID.GetUserID();
 
             if (e.CommandName == "Modify")
             {
 
                 gvRestaurants.EditIndex = rowIndex;
-                PopulateRestaurants(Request.QueryString["UserID"]);
+                PopulateRestaurants(userID);
             }
             else if (e.CommandName == "Update")
             {
@@ -70,7 +80,7 @@ namespace Project4
                     UpdateRestaurant(id, txtName.Text, txtCategory.Text);
 
                     gvRestaurants.EditIndex = -1;
-                    PopulateRestaurants(Request.QueryString["UserID"]);
+                    PopulateRestaurants(userID);
                 }
             }
             else if (e.CommandName == "ViewReservation")

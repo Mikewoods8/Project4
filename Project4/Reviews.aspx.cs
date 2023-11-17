@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Utilities;
 using MyClassLibrary;
+using RestaurantSoapService;
 
 namespace Project4
 {
@@ -23,6 +24,7 @@ namespace Project4
 
                     PopulateReviews(selectedName);
                 }
+                gvReviews.RowDataBound += gvReviews_RowDataBound;
             }
         }
 
@@ -45,88 +47,31 @@ namespace Project4
                 gvReviews.DataBind();
             }
         }
+
+        protected void gvReviews_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                TableCell avgRatingHeader = new TableCell();
+                avgRatingHeader.Text = "Average Rating";
+                e.Row.Cells.AddAt(8, avgRatingHeader);
+            }
+            else if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int foodRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "FoodRating"));
+                int serviceRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "ServiceRating"));
+                int atmosphereRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "AtmosphereRating"));
+                int priceRating = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "PriceRating"));
+                double averageRating = (foodRating + serviceRating + atmosphereRating + priceRating) / 4.0;
+                TableCell avgRatingCell = new TableCell();
+                avgRatingCell.Text = averageRating.ToString("0.00");
+                e.Row.Cells.AddAt(8, avgRatingCell);
+
+            }
+        }
         protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
         {
             Response.Redirect("Reviewer.aspx");
         }
     }
 }
-
-////Function to display avgs of all reviews per restaurant
-//protected void GetAverageScores()
-//{
-//    db = new DBConnect();
-//    cmd.CommandType = CommandType.StoredProcedure;
-//    cmd.CommandText = "GetAverageScores";
-//    DataSet averagesDataSet = db.GetDataSetUsingCmdObj(cmd);
-//    db.CloseConnection();
-//    if (averagesDataSet.Tables.Count > 0 && averagesDataSet.Tables[0].Rows.Count > 0)
-//    {
-//        gvAverages.DataSource = averagesDataSet.Tables[0];
-//        gvAverages.DataBind();
-//    }
-//}
-
-////Function to calculate the avg for each row
-//protected double GetAverage(object foodQuality, object service, object atmosphere, object priceLevel)
-//{
-//    double total = 0.0;
-//    int count = 0;
-//    if (foodQuality != DBNull.Value)
-//    {
-//        total += Convert.ToDouble(foodQuality);
-//        count++;
-//    }
-//    if (service != DBNull.Value)
-//    {
-//        total += Convert.ToDouble(service);
-//        count++;
-//    }
-//    if (atmosphere != DBNull.Value)
-//    {
-//        total += Convert.ToDouble(atmosphere);
-//        count++;
-//    }
-//    if (priceLevel != DBNull.Value)
-//    {
-//        total += Convert.ToDouble(priceLevel);
-//        count++;
-//    }
-//    if (count > 0)
-//    {
-//        return total / count;
-//    }
-//    return 0.0;
-//}
-
-////Function to calculate to overall avg for each restaurant
-//protected double CalculateOverallAverage(object avgFoodQuality, object avgService, object avgAtmosphere, object avgPriceLevel)
-//{
-//    double overallAverage = 0.0;
-//    int count = 0;
-//    if (avgFoodQuality != DBNull.Value)
-//    {
-//        overallAverage += Convert.ToDouble(avgFoodQuality);
-//        count++;
-//    }
-//    if (avgService != DBNull.Value)
-//    {
-//        overallAverage += Convert.ToDouble(avgService);
-//        count++;
-//    }
-//    if (avgAtmosphere != DBNull.Value)
-//    {
-//        overallAverage += Convert.ToDouble(avgAtmosphere);
-//        count++;
-//    }
-//    if (avgPriceLevel != DBNull.Value)
-//    {
-//        overallAverage += Convert.ToDouble(avgPriceLevel);
-//        count++;
-//    }
-//    if (count > 0)
-//    {
-//        overallAverage /= count;
-//    }
-//    return overallAverage;
-//}
