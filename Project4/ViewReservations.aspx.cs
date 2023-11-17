@@ -18,18 +18,16 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                SessionManagement sessionRestaurantName = new SessionManagement();
-                string restaurantName = sessionRestaurantName.GetRestaurantName();
-                if (restaurantName != null)
+                if (Request.QueryString["RestaurantName"] != null)
                 {
-                    string selectedName = restaurantName;
-
-                    PopulateReviews(selectedName);
+                    string selectedName = Request.QueryString["RestaurantName"];
+                    PopulateReservations(selectedName);
                 }
             }
         }
 
-        private void PopulateReviews(string restaurantName)
+
+        private void PopulateReservations(string restaurantName)
         {
             DBConnect db = new DBConnect();
 
@@ -47,32 +45,33 @@ namespace Project4
                 gvReservations.DataSource = dataSet.Tables[0];
                 gvReservations.DataBind();
             }
+            else
+            {
+                gvReservations.EditIndex = -1;
+                gvReservations.DataBind();
+            }
         }
 
         protected void gvReservations_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             SessionManagement sessionID = new SessionManagement();
             string userID = sessionID.GetUserID();
+
+            int rowIndex = -1;
+
             if (e.CommandName == "Delete")
             {
-                int reviewId = Convert.ToInt32(e.CommandArgument);
-
-                DeleteReview(reviewId);
-
-                string selectedName = userID;
-                PopulateReviews(selectedName);
+                int restaurantId = Convert.ToInt32(e.CommandArgument);
+                DeleteReview(restaurantId);
             }
             else if (e.CommandName == "Modify")
             {
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                rowIndex = Convert.ToInt32(e.CommandArgument);
                 gvReservations.EditIndex = rowIndex;
-
-                string selectedName = userID;
-                PopulateReviews(selectedName);
             }
             else if (e.CommandName == "Update")
             {
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                rowIndex = Convert.ToInt32(e.CommandArgument);
 
                 if (rowIndex >= 0 && rowIndex < gvReservations.Rows.Count)
                 {
@@ -87,10 +86,10 @@ namespace Project4
                     UpdateReservations(restaurantId, txtName.Text, txtRestaurant.Text, txtDate.Text, txtTime.Text);
 
                     gvReservations.EditIndex = -1;
-                    string selectedName = userID;
-                    PopulateReviews(selectedName);
                 }
             }
+            string selectedName = Request.QueryString["RestaurantName"];
+            PopulateReservations(selectedName);
         }
 
         private void UpdateReservations(int restaurantId, string name, string restaurant, string date, string time)
@@ -104,7 +103,7 @@ namespace Project4
 
             cmd.Parameters.AddWithValue("@RestaurantId", restaurantId);
             cmd.Parameters.AddWithValue("@Name", name);
-            cmd.Parameters.AddWithValue("@Restuarnt", restaurant);
+            cmd.Parameters.AddWithValue("@Restaurant", restaurant);
             cmd.Parameters.AddWithValue("@Date", date);
             cmd.Parameters.AddWithValue("@Time", time);
 

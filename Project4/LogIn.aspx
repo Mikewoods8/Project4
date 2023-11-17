@@ -1,13 +1,17 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="Project4.LogIn" %>
 
 <!DOCTYPE html>
-<%-- To Do:
+<%-- 
+    To Do:
     Averages (Done)
     Finish Web API DB calls (Working)
     Make responsive (Done)
     Manage session via one of the web API (Done)
-    Modify Reservations
+    Modify Reservations (Done)
     Add Images
+    Search box not showing (Not finished when pulled from master branch?)
+    When you login as a restaurant rep or guest, when you go back to the restaurants page you are set to a reviewer
+    Reps can also write reviews (Need to hide based on user type)
 --%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
