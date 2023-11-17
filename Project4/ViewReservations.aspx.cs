@@ -26,9 +26,8 @@ namespace Project4
                 string restaurantName = sessionRestaurantName.GetRestaurantName();
                 if (restaurantName != null)
                 {
-                    string selectedName = restaurantName;
-
-                    PopulateReviews(selectedName);
+                    string selectedName = Request.QueryString["RestaurantName"];
+                    PopulateReservations(selectedName);
                 }
             }
         }
@@ -53,7 +52,7 @@ namespace Project4
         }
         protected void btnReturnToYourRestaurants_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Reviewer.aspx");
+            Response.Redirect("RepresentativesRestaurants.aspx");
         }
     }
 }

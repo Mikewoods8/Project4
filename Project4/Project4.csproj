@@ -194,7 +194,12 @@
     <Content Include="CreateReservation.aspx" />
     <Content Include="CreateRestaurant.aspx" />
     <Content Include="CreateReview.aspx" />
+    <Content Include="images\American.jfif" />
+    <Content Include="images\Barbecue.jfif" />
+    <Content Include="images\Chinese.jfif" />
+    <Content Include="images\Italian.jfif" />
     <Content Include="images\login-background.jpg" />
+    <Content Include="images\Mexican.jfif" />
     <Content Include="LogIn.aspx" />
     <Content Include="Representative.aspx" />
     <Content Include="RepresentativesRestaurants.aspx" />

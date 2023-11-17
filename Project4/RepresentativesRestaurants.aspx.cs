@@ -120,7 +120,7 @@ namespace Project4
         }
         protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Reviewer.aspx");
+            Response.Redirect("Representative.aspx");
         }
     }
 }

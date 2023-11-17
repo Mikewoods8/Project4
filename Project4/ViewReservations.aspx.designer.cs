@@ -51,6 +51,15 @@ namespace Project4
         protected global::System.Web.UI.WebControls.GridView gvReservations;
 
         /// <summary>
+        /// lblConfirm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConfirm;
+
+        /// <summary>
         /// btnReturnToYourRestaurants control.
         /// </summary>
         /// <remarks>

@@ -34,6 +34,7 @@
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                             <asp:BoundField DataField="Category" HeaderText="Category" ReadOnly="true" />
+                            <asp:ImageField DataImageUrlField="Image" HeaderText="Image" ControlStyle-Width="50" ControlStyle-Height="50" />
                             <asp:TemplateField HeaderText="Details">
                                 <ItemTemplate>
                                     <asp:Button ID="btnDetails" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Container.DataItemIndex %>' />
@@ -54,7 +55,6 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-
     </form>
 </body>
 </html>

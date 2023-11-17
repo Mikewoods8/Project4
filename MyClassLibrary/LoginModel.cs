@@ -37,7 +37,7 @@ namespace MyClassLibrary
                         string role = dataSet.Tables[0].Rows[0]["Role"].ToString();
 
                         if (role == "Representative")
-                        {
+                        { 
                             HttpContext.Current.Response.Redirect("Representative.aspx");
                         }
                         else if (role == "Reviewer")

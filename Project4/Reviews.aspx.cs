@@ -29,6 +29,7 @@ namespace Project4
                     PopulateReviews(selectedName);
                 }
                 gvReviews.RowDataBound += gvReviews_RowDataBound;
+                hdnReferringPageUrl.Value = Request.UrlReferrer?.AbsolutePath;
             }
         }
 
@@ -75,7 +76,31 @@ namespace Project4
         }
         protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Reviewer.aspx");
+            string referringPageUrl = hdnReferringPageUrl.Value;
+            if (!string.IsNullOrEmpty(referringPageUrl))
+            {
+                referringPageUrl = referringPageUrl.ToLower();
+                if (referringPageUrl.Contains("reviewer"))
+                {
+                    Response.Redirect("Reviewer.aspx");
+                }
+                else if (referringPageUrl.Contains("representative"))
+                {
+                    Response.Redirect("Representative.aspx");
+                }
+                else if (referringPageUrl.Contains("sitevisitor"))
+                {
+                    Response.Redirect("SiteVisitor.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Default.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
     }
 }

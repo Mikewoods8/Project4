@@ -32,10 +32,11 @@
                     <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" BackColor="#3399FF" BorderStyle="Solid" Font-Size="Medium" />
                 </div>
                 <div id="GridView">
-                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="False" OnRowCommand="gvRestaurants_RowCommand">
+                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="False" OnRowCommand="gvRestaurants_RowCommand" RowDataBound="gvRestaurants_RowDataBound">
                         <Columns>
                             <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                             <asp:BoundField DataField="Category" HeaderText="Category" ReadOnly="true" />
+                            <asp:ImageField DataImageUrlField="Image" HeaderText="Image" ControlStyle-Width="50" ControlStyle-Height="50" />
                             <asp:TemplateField HeaderText="Details">
                                 <ItemTemplate>
                                     <asp:Button ID="btnDetails" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Container.DataItemIndex %>' />

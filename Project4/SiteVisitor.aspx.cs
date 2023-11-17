@@ -41,6 +41,30 @@ namespace Project4
             JavaScriptSerializer js = new JavaScriptSerializer();
             RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
 
+            foreach (var restaurant in restaurants)
+            {
+                switch (restaurant.Category)
+                {
+                    case "American":
+                        restaurant.Image = "~/images/American.jfif";
+                        break;
+                    case "Italian":
+                        restaurant.Image = "~/images/Italian.jfif";
+                        break;
+                    case "Barbecue":
+                        restaurant.Image = "~/images/Barbecue.jfif";
+                        break;
+                    case "Mexican":
+                        restaurant.Image = "~/images/Mexican.jfif";
+                        break;
+                    case "Chinese":
+                        restaurant.Image = "~/images/Chinese.jfif";
+                        break;
+                    default:
+                        restaurant.Image = "~/images/American.jfif";
+                        break;
+                }
+            }
             gvRestaurants.DataSource = restaurants;
             gvRestaurants.DataBind();
         }

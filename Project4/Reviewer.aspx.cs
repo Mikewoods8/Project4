@@ -13,6 +13,7 @@ using RestaurantSoapService;
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
 
 namespace Project4
 {
@@ -23,8 +24,7 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                ShowRestaurants();
-
+                    ShowRestaurants();
             }
         }
 
@@ -43,6 +43,30 @@ namespace Project4
             JavaScriptSerializer js = new JavaScriptSerializer();
             RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
 
+            foreach (var restaurant in restaurants)
+            {
+                switch (restaurant.Category)
+                {
+                    case "American":
+                        restaurant.Image = "~/images/American.jfif";
+                        break;
+                    case "Italian":
+                        restaurant.Image = "~/images/Italian.jfif";
+                        break;
+                    case "Barbecue":
+                        restaurant.Image = "~/images/Barbecue.jfif";
+                        break;
+                    case "Mexican":
+                        restaurant.Image = "~/images/Mexican.jfif";
+                        break;
+                    case "Chinese":
+                        restaurant.Image = "~/images/Chinese.jfif";
+                        break;
+                    default:
+                        restaurant.Image = "~/images/American.jfif";
+                        break;
+                }
+            }
             gvRestaurants.DataSource = restaurants;
             gvRestaurants.DataBind();
         }
@@ -128,6 +152,24 @@ namespace Project4
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowDetails", $"alert('Name: {details.Name}\\nInformation: {details.Information}');", true);
             }
         }
+
+        //protected void gvRestaurants_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        GetRole getRole = new GetRole();
+        //        string role = getRole.GetUserRole();
+
+        //        // Assuming "Write a Review" column is the one you want to hide
+        //        Button btnWriteReviews = (Button)e.Row.FindControl("btnWriteReviews");
+
+        //        if (role != "Reviewer" && btnWriteReviews != null)
+        //        {
+        //            // Hide the "Write a Review" button
+        //            btnWriteReviews.Visible = false;
+        //        }
+        //    }
+        //}
 
         protected void btnLogOut_Click(object sender, EventArgs e)
         {
