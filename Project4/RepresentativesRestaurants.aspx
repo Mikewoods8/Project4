@@ -14,11 +14,12 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div id="GridView">
-                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="False" OnRowCommand="gvRestaurants_RowCommand" OnRowUpdating="gvRestaurants_RowUpdating">
+                    <asp:GridView ID="gvRestaurants" runat="server" AutoGenerateColumns="False" OnRowCommand="gvRestaurants_RowCommand" OnRowDeleting="gvRestaurants_RowDeleting" OnRowUpdating="gvRestaurants_RowUpdating" DataKeyNames="Id">
                         <Columns>
+                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="true" />
                             <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                             <asp:BoundField DataField="Category" HeaderText="Category" ReadOnly="true" />
-                            <asp:BoundField DataField="RepresentativeID" HeaderText="Representative ID" ReadOnly="true" />
+                            <asp:BoundField DataField="RepresentativeId" HeaderText="Representative ID" ReadOnly="true" />
                             <asp:TemplateField HeaderText="Modify">
                                 <ItemTemplate>
                                     <asp:Button ID="btnModify" runat="server" Text="Modify" CommandName="Modify" CommandArgument='<%# Container.DataItemIndex %>' />
@@ -32,6 +33,11 @@
                             <asp:TemplateField HeaderText="Reservations">
                                 <ItemTemplate>
                                     <asp:Button ID="btnReservations" runat="server" Text="View Reservations" CommandName="ViewReservation" CommandArgument='<%# Container.DataItemIndex %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Delete">
+                                <ItemTemplate>
+                                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Container.DataItemIndex %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

@@ -46,7 +46,7 @@ namespace Project4
                 response.Close();
 
                 JavaScriptSerializer js = new JavaScriptSerializer();
-                ReviewModel[] reviews = js.Deserialize<ReviewModel[]>(data);
+                PersonalReviewModel[] reviews = js.Deserialize<PersonalReviewModel[]>(data);
 
                 gvPersonalReviews.DataSource = reviews;
                 gvPersonalReviews.DataBind();
@@ -57,9 +57,12 @@ namespace Project4
         {
             SessionManagement sessionID = new SessionManagement();
             string userID = sessionID.GetUserID();
+
             if (e.CommandName == "Delete")
             {
-                int reviewId = Convert.ToInt32(e.CommandArgument);
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+                int reviewId = Convert.ToInt32(gvPersonalReviews.DataKeys[rowIndex].Value);
 
                 DeleteReview(reviewId);
 
@@ -68,33 +71,11 @@ namespace Project4
             }
             else if (e.CommandName == "Modify")
             {
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
-                gvPersonalReviews.EditIndex = rowIndex;
 
-                string selectedName = userID;
-                PopulateReviews(selectedName);
             }
             else if (e.CommandName == "Update")
             {
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                if (rowIndex >= 0 && rowIndex < gvPersonalReviews.Rows.Count)
-                {
-                    GridViewRow editedRow = gvPersonalReviews.Rows[rowIndex];
-                    TextBox txtFoodRating = editedRow.FindControl("txtFoodRating") as TextBox;
-                    TextBox txtServiceRating = editedRow.FindControl("txtServiceRating") as TextBox;
-                    TextBox txtAtmosphereRating = editedRow.FindControl("txtAtmosphereRating") as TextBox;
-                    TextBox txtPriceRating = editedRow.FindControl("txtPriceRating") as TextBox;
-                    TextBox txtComments = editedRow.FindControl("txtComments") as TextBox;
-
-                    int reviewId = Convert.ToInt32(gvPersonalReviews.DataKeys[rowIndex].Value);
-
-                    UpdateReview(reviewId, txtFoodRating.Text, txtServiceRating.Text, txtAtmosphereRating.Text, txtPriceRating.Text, txtComments.Text);
-
-                    gvPersonalReviews.EditIndex = -1;
-                    string selectedName = userID;
-                    PopulateReviews(selectedName);
-                }
             }
         }
 
@@ -122,48 +103,58 @@ namespace Project4
         }
 
         //method to update reviews to database (need to implement web api)
-        private void UpdateReview(int reviewId, string foodRating, string serviceRating, string atmosphereRating, string priceRating, string comments)
+        private void UpdateReview(UpdateReviewModel updateReview)
         {
-            DBConnect db = new DBConnect();
+            return;
 
-            string storedProcedureName = "UpdateReview";
-
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@ReviewId", reviewId);
-            cmd.Parameters.AddWithValue("@FoodRating", foodRating);
-            cmd.Parameters.AddWithValue("@ServiceRating", serviceRating);
-            cmd.Parameters.AddWithValue("@AtmosphereRating", atmosphereRating);
-            cmd.Parameters.AddWithValue("@PriceRating", priceRating);
-            cmd.Parameters.AddWithValue("@Comments", comments);
-
-            db.DoUpdateUsingCmdObj(cmd);
-        }
-
-        protected void gvPersonalReviews_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            lblConfirm.Text = "Review successfully updated.";
-        }
-
-        protected void gvReviews_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            lblConfirm.Text = "Review successfully deleted.";
         }
 
         //method to handle deleting a review from the database (need to implement web api)
         private void DeleteReview(int reviewId)
         {
-            DBConnect db = new DBConnect();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            String jsonUser = js.Serialize(reviewId);
 
-            string storedProcedureName = "DeleteReview";
+            try
+            {
+                WebRequest request = WebRequest.Create(webApiUrl + $"ReviewService/DeleteReview?reviewId={reviewId}");
+                request.Method = "DELETE";
+                request.ContentLength = jsonUser.Length;
+                request.ContentType = "application/json";
 
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
+                StreamWriter writer = new StreamWriter(request.GetRequestStream());
+                writer.Write(jsonUser);
+                writer.Flush();
+                writer.Close();
 
-            cmd.Parameters.AddWithValue("@ReviewId", reviewId);
+                WebResponse response = request.GetResponse();
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                String data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
 
-            db.DoUpdateUsingCmdObj(cmd);
+                if (data == "true")
+                    lblConfirm.Text = "Review succesfully deleted.";
+                else
+                    lblConfirm.Text = "A problem occured. Review not deleted";
+
+            }
+            catch (Exception ex)
+            {
+                lblConfirm.Text = "Error: " + ex.Message;
+
+            }
+        }
+
+        protected void gvPersonalReviews_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            return;
+        }
+
+        protected void gvReviews_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            return;
         }
 
         protected void btnReturnToRestaurants_Click(object sender, EventArgs e)

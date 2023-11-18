@@ -27,9 +27,7 @@ namespace Project4
                 string userID = sessionID.GetUserID();
                 if (userID != null)
                 {
-                    string selectedName = userID;
-
-                    PopulateRestaurants(selectedName);
+                    PopulateRestaurants(userID);
                 }
                 else if (Request.QueryString["UserID"] != null)
                 {
@@ -52,7 +50,7 @@ namespace Project4
             response.Close();
 
             JavaScriptSerializer js = new JavaScriptSerializer();
-            RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
+            UpdateRestaurantModel[] restaurants = js.Deserialize<UpdateRestaurantModel[]>(data);
 
             gvRestaurants.DataSource = restaurants;
             gvRestaurants.DataBind();
@@ -62,39 +60,83 @@ namespace Project4
         //method to handle row commands
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
             SessionManagement sessionID = new SessionManagement();
             string userID = sessionID.GetUserID();
 
-            if (e.CommandName == "Modify")
+            if (e.CommandName == "Delete")
             {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                gvRestaurants.EditIndex = rowIndex;
-                PopulateRestaurants(userID);
-            }
-            else if (e.CommandName == "Update")
-            {
+                int restaurantId = Convert.ToInt32(gvRestaurants.DataKeys[rowIndex].Value);
 
-                if (rowIndex >= 0 && rowIndex < gvRestaurants.Rows.Count)
-                {
-                    GridViewRow editedRow = gvRestaurants.Rows[rowIndex];
-                    TextBox txtName = editedRow.FindControl("txtName") as TextBox;
-                    TextBox txtCategory = editedRow.FindControl("txtCategory") as TextBox;
+                DeleteReview(restaurantId);
 
-                    int id = Convert.ToInt32(gvRestaurants.DataKeys[rowIndex].Value);
-
-                    UpdateRestaurant(id, txtName.Text, txtCategory.Text);
-
-                    gvRestaurants.EditIndex = -1;
-                    PopulateRestaurants(userID);
-                }
+                string selectedName = userID;
+                PopulateRestaurants(selectedName);
             }
             else if (e.CommandName == "ViewReservation")
             {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
                 string selectedName = gvRestaurants.Rows[rowIndex].Cells[1].Text;
 
                 Response.Redirect($"ViewReservations.aspx?RestaurantName={selectedName}");
             }
+            else if (e.CommandName == "Modify")
+            {
+
+            }
+            else if (e.CommandName == "Update")
+            {
+
+            }
+        }
+
+        private void DeleteReview(int restaurantId)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            String jsonUser = js.Serialize(restaurantId);
+
+            try
+            {
+                WebRequest request = WebRequest.Create(webApiUrl + $"RestaurantService/DeleteRestaurant?restaurantId={restaurantId}");
+                request.Method = "DELETE";
+                request.ContentLength = jsonUser.Length;
+                request.ContentType = "application/json";
+
+                StreamWriter writer = new StreamWriter(request.GetRequestStream());
+                writer.Write(jsonUser);
+                writer.Flush();
+                writer.Close();
+
+                WebResponse response = request.GetResponse();
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                String data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                if (data == "true")
+                    lblConfirm.Text = "Restaurant succesfully deleted.";
+                else
+                    lblConfirm.Text = "A problem occured. Restaurant not deleted.";
+
+            }
+            catch (Exception ex)
+            {
+                lblConfirm.Text = "Error: " + ex.Message;
+
+            }
+        }
+
+        //method to handle updating into the database (need to implment web api)
+        private bool UpdateRestaurant(UpdateRestaurantModel updateRestaurant)
+        {
+            return true;
+        }
+
+        protected void gvRestaurants_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            return;
         }
 
         protected void gvRestaurants_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -102,22 +144,6 @@ namespace Project4
             lblConfirm.Text = "Restaurant succesfully updated.";
         }
 
-        //method to handle updating into the database (need to implment web api)
-        private void UpdateRestaurant(int id, string name, string category)
-        {
-            DBConnect db = new DBConnect();
-
-            string storedProcedureName = "UpdateRestaurant";
-
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@Id", id);
-            cmd.Parameters.AddWithValue("@Name", name);
-            cmd.Parameters.AddWithValue("@Category", category);
-
-            db.DoUpdateUsingCmdObj(cmd);
-        }
         protected void btnReturnToRestaurants_Click(object sender, EventArgs e)
         {
             Response.Redirect("Representative.aspx");
