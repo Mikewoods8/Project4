@@ -22,11 +22,19 @@ namespace Project4
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["RestaurantName"] != null)
+                SessionManagement sessionID = new SessionManagement();
+                string name = sessionID.GetRestaurantName();
+                if (name != null)
+                {
+                    PopulateReservations(name);
+                }
+                else if (Request.QueryString["RestaurantName"] != null)
                 {
                     string selectedName = Request.QueryString["RestaurantName"];
                     PopulateReservations(selectedName);
                 }
+
+
             }
         }
 
@@ -43,7 +51,7 @@ namespace Project4
             response.Close();
 
             JavaScriptSerializer js = new JavaScriptSerializer();
-            ReservationModel[] reservations = js.Deserialize<ReservationModel[]>(data);
+            UpdateReservationModel[] reservations = js.Deserialize<UpdateReservationModel[]>(data);
 
             gvReservations.DataSource = reservations;
             gvReservations.DataBind();
@@ -53,85 +61,83 @@ namespace Project4
         protected void gvReservations_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             SessionManagement sessionID = new SessionManagement();
-            string userID = sessionID.GetUserID();
+            string name = sessionID.GetRestaurantName();
 
-            int rowIndex = -1;
 
             if (e.CommandName == "Delete")
             {
-                int restaurantId = Convert.ToInt32(e.CommandArgument);
-                DeleteReview(restaurantId);
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+                int reservationId = Convert.ToInt32(gvReservations.DataKeys[rowIndex].Value);
+
+                DeleteReview(reservationId);
+
+                string selectedName = name;
+                PopulateReservations(selectedName);
             }
             else if (e.CommandName == "Modify")
             {
-                rowIndex = Convert.ToInt32(e.CommandArgument);
-                gvReservations.EditIndex = rowIndex;
+
             }
             else if (e.CommandName == "Update")
             {
-                rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                if (rowIndex >= 0 && rowIndex < gvReservations.Rows.Count)
-                {
-                    GridViewRow editedRow = gvReservations.Rows[rowIndex];
-                    TextBox txtName = editedRow.FindControl("txtName") as TextBox;
-                    TextBox txtRestaurant = editedRow.FindControl("txtRestaurant") as TextBox;
-                    TextBox txtDate = editedRow.FindControl("txtDate") as TextBox;
-                    TextBox txtTime = editedRow.FindControl("txtTime") as TextBox;
-
-                    int restaurantId = Convert.ToInt32(gvReservations.DataKeys[rowIndex].Value);
-
-                    UpdateReservations(restaurantId, txtName.Text, txtRestaurant.Text, txtDate.Text, txtTime.Text);
-
-                    gvReservations.EditIndex = -1;
-                }
             }
-            string selectedName = Request.QueryString["RestaurantName"];
-            PopulateReservations(selectedName);
         }
 
-        private void UpdateReservations(int restaurantId, string name, string restaurant, string date, string time)
+        private void DeleteReview(int reservationId)
         {
-            DBConnect db = new DBConnect();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            String jsonUser = js.Serialize(reservationId);
 
-            string storedProcedureName = "UpdateRestaurantForGV";
+            try
+            {
+                WebRequest request = WebRequest.Create(webApiUrl + $"ReservationService/DeleteReservation?reservationId={reservationId}");
+                request.Method = "DELETE";
+                request.ContentLength = jsonUser.Length;
+                request.ContentType = "application/json";
 
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
+                StreamWriter writer = new StreamWriter(request.GetRequestStream());
+                writer.Write(jsonUser);
+                writer.Flush();
+                writer.Close();
 
-            cmd.Parameters.AddWithValue("@RestaurantId", restaurantId);
-            cmd.Parameters.AddWithValue("@Name", name);
-            cmd.Parameters.AddWithValue("@Restaurant", restaurant);
-            cmd.Parameters.AddWithValue("@Date", date);
-            cmd.Parameters.AddWithValue("@Time", time);
+                WebResponse response = request.GetResponse();
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                String data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
 
-            db.DoUpdateUsingCmdObj(cmd);
+                if (data == "true")
+                    lblConfirm.Text = "Reservation succesfully deleted.";
+                else
+                    lblConfirm.Text = "A problem occured. Reservation not deleted.";
+
+            }
+            catch (Exception ex)
+            {
+                lblConfirm.Text = "Error: " + ex.Message;
+
+            }
+
+        }
+
+        private void UpdateReservations()
+        {
+
         }
 
         protected void gvReservations_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            lblConfirm.Text = "Review successfully updated.";
+            return;
         }
 
         protected void gvReservations_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            lblConfirm.Text = "Review successfully deleted.";
+            return;
         }
 
-        private void DeleteReview(int restaurantId)
-        {
-            DBConnect db = new DBConnect();
-
-            string storedProcedureName = "DeleteRestaurantReservation";
-
-            SqlCommand cmd = new SqlCommand(storedProcedureName);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@RestaurantId", restaurantId);
-
-            db.DoUpdateUsingCmdObj(cmd);
-
-        }
         protected void btnReturnToYourRestaurants_Click(object sender, EventArgs e)
         {
             Response.Redirect("RepresentativesRestaurants.aspx");

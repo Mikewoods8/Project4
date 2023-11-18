@@ -14,8 +14,9 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div id="GridView">
-                    <asp:GridView ID="gvPersonalReviews" runat="server" AutoGenerateColumns="False" OnRowCommand="gvReviews_RowCommand" OnRowDeleting="gvReviews_RowDeleting" OnRowUpdating="gvPersonalReviews_RowUpdating" OnRowDataBound="gvPersonalReviews_RowDataBound">
+                    <asp:GridView ID="gvPersonalReviews" runat="server" AutoGenerateColumns="False" OnRowCommand="gvReviews_RowCommand" OnRowDeleting="gvReviews_RowDeleting" OnRowUpdating="gvPersonalReviews_RowUpdating" OnRowDataBound="gvPersonalReviews_RowDataBound" DataKeyNames="Id" >
                         <Columns>
+                            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="true" />
                             <asp:BoundField DataField="UserId" HeaderText="UserId" ReadOnly="true" />
                             <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="true" />
                             <asp:BoundField DataField="Restaurant" HeaderText="Restaurant" ReadOnly="true" />
@@ -26,7 +27,7 @@
                             <asp:BoundField DataField="Comments" HeaderText="Comments" ReadOnly="true" />
                             <asp:TemplateField HeaderText="Modify">
                                 <ItemTemplate>
-                                    <asp:Button ID="btnModify" runat="server" Text="Modify" CommandName="Modify" CommandArgument='<%# Container.DataItemIndex %>' />
+                                  <asp:Button ID="btnModify" runat="server" Text="Modify" CommandName="Modify" CommandArgument='<%# Container.DataItemIndex %>' />
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:TextBox ID="txtFoodRating" runat="server" Text='<%# Bind("FoodRating") %>' />
