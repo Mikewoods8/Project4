@@ -72,7 +72,6 @@ namespace Project4
         //method to handle searching a restaurant using web api
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-
             List<string> selectedCategories = new List<string>();
 
             foreach (ListItem item in chkListCategory.Items)
@@ -89,30 +88,61 @@ namespace Project4
             }
             else
             {
-                List<RestaurantModel> allRestaurants = new List<RestaurantModel>();
+                WebRequest request = WebRequest.Create(webApiUrl + "RestaurantService/GetRestaurant/");
+                WebResponse response = request.GetResponse();
 
-                foreach (string category in selectedCategories)
+                Stream theDataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(theDataStream);
+                String data = reader.ReadToEnd();
+                reader.Close();
+                response.Close();
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                RestaurantModel[] allRestaurants = js.Deserialize<RestaurantModel[]>(data);
+
+                foreach (var restaurant in allRestaurants)
                 {
-                    WebRequest request = WebRequest.Create(webApiUrl + $"RestaurantService/GetRestaurantByCategory?category={category}");
-                    WebResponse response = request.GetResponse();
-
-                    Stream theDataStream = response.GetResponseStream();
-                    StreamReader reader = new StreamReader(theDataStream);
-                    String data = reader.ReadToEnd();
-                    reader.Close();
-                    response.Close();
-
-                    JavaScriptSerializer js = new JavaScriptSerializer();
-                    RestaurantModel[] restaurants = js.Deserialize<RestaurantModel[]>(data);
-
-                    allRestaurants.AddRange(restaurants);
+                    switch (restaurant.Category)
+                    {
+                        case "American":
+                            restaurant.Image = "~/images/American.jfif";
+                            break;
+                        case "Italian":
+                            restaurant.Image = "~/images/Italian.jfif";
+                            break;
+                        case "Barbecue":
+                            restaurant.Image = "~/images/Barbecue.jfif";
+                            break;
+                        case "Mexican":
+                            restaurant.Image = "~/images/Mexican.jfif";
+                            break;
+                        case "Chinese":
+                            restaurant.Image = "~/images/Chinese.jfif";
+                            break;
+                        default:
+                            restaurant.Image = "~/images/American.jfif";
+                            break;
+                    }
                 }
 
-                gvRestaurants.DataSource = allRestaurants;
-                    gvRestaurants.DataBind();
+                List<RestaurantModel> filteredRestaurants;
 
+                if (selectedCategories.Count > 0)
+                {
+                    filteredRestaurants = allRestaurants
+                        .Where(r => selectedCategories.Contains(r.Category))
+                        .ToList();
                 }
+                else
+                {
+                    filteredRestaurants = allRestaurants.ToList();
+                }
+
+                gvRestaurants.DataSource = filteredRestaurants;
+                gvRestaurants.DataBind();
             }
+        }
+
 
         //method to handle row commands
         protected void gvRestaurants_RowCommand(object sender, GridViewCommandEventArgs e)
