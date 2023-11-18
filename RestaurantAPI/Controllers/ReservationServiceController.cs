@@ -46,23 +46,24 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpGet("GetReservationByRestaurant")]
-        public List<ReservationModel> GetReservationByRestaurant(string selectedName)
+        public List<UpdateReservationModel> GetReservationByRestaurant(string selectedName)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCommand = new SqlCommand();
             objCommand.CommandType = CommandType.StoredProcedure;
-            objCommand.CommandText = "GetRestaurantsByReservation";
+            objCommand.CommandText = "GetRestaurantByReservation";
 
             objCommand.Parameters.AddWithValue("@RestaurantName", selectedName);
 
             DataSet ds = objDB.GetDataSet(objCommand);
 
-            List<ReservationModel> reservations = new List<ReservationModel>();
-            ReservationModel reservation;
+            List<UpdateReservationModel> reservations = new List<UpdateReservationModel>();
+            UpdateReservationModel reservation;
 
             foreach (DataRow record in ds.Tables[0].Rows)
             {
-                reservation = new ReservationModel();
+                reservation = new UpdateReservationModel();
+                reservation.Id = record["Id"].ToString();
                 reservation.Name = record["Name"].ToString();
                 reservation.Restaurant = record["Restaurant"].ToString();
                 reservation.Date = record["Date"].ToString();
@@ -73,6 +74,33 @@ namespace RestaurantAPI.Controllers
             objDB.CloseConnection();
 
             return reservations;
+        }
+
+        [HttpDelete("DeleteReservation")]
+        public Boolean DeleteReview(int reservationId)
+        {
+            try
+            {
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCommand = new SqlCommand();
+
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.CommandText = "DeleteRestaurantReservation";
+
+                objCommand.Parameters.AddWithValue("@ReservationId", reservationId);
+
+                int retVal = objDB.DoUpdateUsingCmdObj(objCommand);
+
+                if (retVal > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
         }
 
     }

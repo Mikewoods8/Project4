@@ -65,7 +65,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpGet("GetRestaurantById")]
-        public List<RestaurantModel> GetRestaurantById(string userId)
+        public List<UpdateRestaurantModel> GetRestaurantById(string userId)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCommand = new SqlCommand();
@@ -76,15 +76,16 @@ namespace RestaurantAPI.Controllers
 
             DataSet ds = objDB.GetDataSet(objCommand);
 
-            List<RestaurantModel> restaurants = new List<RestaurantModel>();
-            RestaurantModel restaurant;
+            List<UpdateRestaurantModel> restaurants = new List<UpdateRestaurantModel>();
+            UpdateRestaurantModel restaurant;
 
             foreach (DataRow record in ds.Tables[0].Rows)
             {
-                restaurant = new RestaurantModel();
+                restaurant = new UpdateRestaurantModel();
+                restaurant.Id = Convert.ToInt32(record["Id"]);
                 restaurant.Name = record["Name"].ToString();
                 restaurant.Category = record["Category"].ToString();
-                restaurant.RepresentativeID = record["RepresentativeID"].ToString();
+                restaurant.RepresentativeId = record["RepresentativeID"].ToString();
                 restaurants.Add(restaurant);
             }
 
@@ -121,7 +122,32 @@ namespace RestaurantAPI.Controllers
             return restaurants;
         }
 
+        [HttpDelete("DeleteRestaurant")]
+        public Boolean DeleteReview(int restaurantId)
+        {
+            try
+            {
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCommand = new SqlCommand();
 
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.CommandText = "DeleteRestaurant";
+
+                objCommand.Parameters.AddWithValue("@RestaurantId", restaurantId);
+
+                int retVal = objDB.DoUpdateUsingCmdObj(objCommand);
+
+                if (retVal > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
 
     }
 }

@@ -84,7 +84,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpGet("GetReviewById")]
-        public List<ReviewModel> GetReviewsById(string userId)
+        public List<PersonalReviewModel> GetReviewsById(string userId)
         {
             DBConnect objDB = new DBConnect();
             SqlCommand objCommand = new SqlCommand();
@@ -95,12 +95,13 @@ namespace RestaurantAPI.Controllers
 
             DataSet ds = objDB.GetDataSet(objCommand);
 
-            List<ReviewModel> reviews = new List<ReviewModel>();
-            ReviewModel review;
+            List<PersonalReviewModel> reviews = new List<PersonalReviewModel>();
+            PersonalReviewModel review;
 
             foreach (DataRow record in ds.Tables[0].Rows)
             {
-                review = new ReviewModel();
+                review = new PersonalReviewModel();
+                review.Id = Convert.ToInt32(record["Id"]);
                 review.UserId = record["UserID"].ToString();
                 review.Name = record["Name"].ToString();
                 review.Restaurant = record["Restaurant"].ToString();
@@ -116,6 +117,34 @@ namespace RestaurantAPI.Controllers
 
             return reviews;
         }
+
+        [HttpDelete("DeleteReview")]
+        public Boolean DeleteReview(int reviewId)
+        {
+            try
+            {
+                DBConnect objDB = new DBConnect();
+                SqlCommand objCommand = new SqlCommand();
+
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.CommandText = "DeleteReview";
+
+                objCommand.Parameters.AddWithValue("@ReviewId", reviewId);
+
+                int retVal = objDB.DoUpdateUsingCmdObj(objCommand);
+
+                if (retVal > 0)
+                    return true;
+                else
+                    return false; 
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+
     }
 
 }
