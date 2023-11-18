@@ -16,7 +16,7 @@
             <ContentTemplate>
                 <div id="title">
                     <asp:Button ID="btnLogOut" runat="server" Text="Log Out" BackColor="#FF3300" BorderStyle="Solid" Font-Size="Large" OnClick="btnLogOut_Click" />
-                    <asp:Button ID="btnViewPersonalReviews" runat="server" BackColor="#FF3300" BorderStyle="Solid" Font-Size="Large" OnClick="btnViewPersonalReviews_Click" Text="Your Reviews" />
+<%--                    <asp:Button ID="btnViewPersonalReviews" runat="server" BackColor="#FF3300" BorderStyle="Solid" Font-Size="Large" OnClick="btnViewPersonalReviews_Click" Text="Your Reviews" />--%>
                     <asp:Button ID="btnAddRestaurant" runat="server" BackColor="#FF3300" BorderStyle="Solid" Font-Size="Large" Text="Add Restaurant" OnClick="btnAddRestaurant_Click" />
                     <asp:Button ID="btnRestaurants" runat="server" BackColor="#FF3300" BorderStyle="Solid" Font-Size="Large" OnClick="btnRestaurants_Click" Text="Your Restaurants" />
                     <h1>Welcome, You are Viewing as a Restaurant Representative</h1>
